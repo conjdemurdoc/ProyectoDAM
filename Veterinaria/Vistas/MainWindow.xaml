@@ -4,9 +4,96 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Veterinaria"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" Style="{DynamicResource WindowFont}"
+        Title="Menú principal" Height="500" Width="1000" ResizeMode="CanMinimize" Background="{DynamicResource PseudoVerdeBrush}">
+    <Window.Resources>
+        <!-- tamaño maximo del contenido del user control, teniendo en cuenta la anchura = 1000, es 750, y la altura es 500 (la misma que el formulario original, éste)-->
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="36*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="1" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Expander Grid.Row="0" Background="#81776B" IsExpanded="{Binding IsEnabled,RelativeSource={RelativeSource Self}, Mode=OneWay}" IsEnabled="{Binding NivelAcceso}">
+                <Expander.Header>
+                    <BulletDecorator>
+                        <!-->
+                            <BulletDecorator.Bullet>
+                                <Image Source="{StaticResource ImagenSource}" Height="20" VerticalAlignment="Center" Margin="0,7" HorizontalAlignment="Center"></Image>
+                            </BulletDecorator.Bullet>
+                        </-->
+                        <BulletDecorator.Child>
+                            <TextBlock TextWrapping="Wrap" Margin="0,10" Text="Gestión de datos" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="White"  />
+                        </BulletDecorator.Child>
+
+                    </BulletDecorator>
+                </Expander.Header>
+                <StackPanel>
+                    <Button x:Name="btnClientes" Margin="10"
+                             Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}" >
+                        <Label Foreground="White" HorizontalAlignment="Center" Content="Clientes"/>
+                    </Button>
+                    <Button x:Name="btnMascotas" Margin="10,0,10,10"
+                             Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"  Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}">
+                        <Label Foreground="white" HorizontalAlignment="Center" Content="Mascotas"/>
+                    </Button>
+                    <Button x:Name="btnUsuarios" Margin="10,0,10,10"
+                             Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}" >
+                        <Label Foreground="White" HorizontalAlignment="Center" Content="Usuarios"/>
+                    </Button>
+                    <Button x:Name="btnProveedores" Margin="10,0,10,10"
+                             Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}" >
+                        <Label Foreground="White" HorizontalAlignment="Center" Content="Proveedores"/>
+                    </Button>
+                    <Button x:Name="btnProductos" Margin="10,0,10,10"
+                             Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}" >
+                        <Label Foreground="White" HorizontalAlignment="Center" Content="Productos"/>
+                    </Button>
+                    <Button x:Name="btnServicios" Margin="10,0,10,10"
+                             Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"  Style="{DynamicResource BotonBase}">
+                        <!--Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}"-->
+                        <Label Foreground="White" HorizontalAlignment="Center" Content="Servicios"/>
+                    </Button>
+                </StackPanel>
+            </Expander>
+            <Expander Grid.Row="2" Background="#81776B" IsExpanded="true">
+                <Expander.Header>
+                    <BulletDecorator>
+                        <!-->
+                            <BulletDecorator.Bullet>
+                                <Image Source="{StaticResource ImagenSource}" Height="20" Margin="0,10" VerticalAlignment="Center"/>
+                            </BulletDecorator.Bullet>
+                        </-->
+                        <BulletDecorator.Child>
+                            <TextBlock Margin="0,10" TextWrapping="Wrap" Text="Atención al cliente" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="White" />
+                        </BulletDecorator.Child>
+                    </BulletDecorator>
+                </Expander.Header>
+                <StackPanel>
+                    <Button x:Name="btnFactura" Margin="10" Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}">
+                        <Label Foreground="white" HorizontalAlignment="Center" Content="BotonCabecera2"/>
+                    </Button>
+                </StackPanel>
+            </Expander>
+        </Grid>
+        <GridSplitter IsEnabled="False" Grid.Column="2" Grid.RowSpan="3" Width="5" HorizontalAlignment="Center" Background="#514748" />
+        <Grid Grid.Column="3" Grid.Row="1">
+            <ContentControl Name="ContentControl1" Content="{Binding VistaContenida,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
+        <!-- <Button Grid.Column="0" Margin="0,50" IsEnabled="{Binding Path=NivelAcceso}"/>-->
     </Grid>
 </Window>

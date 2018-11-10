@@ -17,8 +17,10 @@ namespace ModeloDatos
         public int ID { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
         public string CLIENTE { get; set; }
-        public Nullable<float> COSTETOTAL { get; set; }
+        public int PENDIENTE { get; set; }
+        public Nullable<int> PRODUCTO { get; set; }
     
         public virtual TBLCLIENTES TBLCLIENTES { get; set; }
+        public virtual TBLPRODUCTOS TBLPRODUCTOS { get; set; }
     }
 }

@@ -14,12 +14,6 @@ namespace ModeloDatos
     
     public partial class TBLMASCOTAS
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TBLMASCOTAS()
-        {
-            this.TBLRECETAS = new HashSet<TBLRECETAS>();
-        }
-    
         public int IDMASCOTA { get; set; }
         public string NOMBRE { get; set; }
         public string RAZA { get; set; }
@@ -27,7 +21,5 @@ namespace ModeloDatos
         public string PROPIETARIO { get; set; }
     
         public virtual TBLCLIENTES TBLCLIENTES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBLRECETAS> TBLRECETAS { get; set; }
     }
 }

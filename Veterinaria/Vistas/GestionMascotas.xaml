@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Veterinaria.Vistas.GestionMascotas"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Veterinaria.Vistas"
+             xmlns:vm="clr-namespace:Veterinaria.CodigoDelegado"
+             mc:Ignorable="d" Style="{DynamicResource UserFont}"
+        Height="400" Width="650" Background="{DynamicResource PseudoVerdeBrush }">
+    <UserControl.Resources>
+        <vm:GestionMascotasViewModel x:Key="VmMascotas"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding Datos}" 
+                  BorderBrush="Transparent" 
+                  FontSize="12" 
+                  FontWeight="Bold"
+                  ScrollViewer.CanContentScroll="False" 
+                  Grid.Row="0"
+                  Grid.ColumnSpan="3" 
+                  Margin="0"
+                  Background="Transparent">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <Button Command="{Binding Comando}" 
+                            CommandParameter="{Binding CP}"
+                                        BorderThickness="0" 
+                                        Margin="2,0,0,0" Padding="0" Style="{DynamicResource BotonBase}" 
+                                        >
+                        <Path Data="{Binding Icono}" Stretch="Uniform" Fill="{DynamicResource BlancoPuroBrush}" Width="32" Height="32" Margin="0,5,0,5"/>
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding Nombre}"/>
+                        </Button.ToolTip>
+                    </Button>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <DataGrid ItemsSource="{Binding ListaMascotas}"
+                  HeadersVisibility="Column"
+                  SelectedItem="{Binding MascotaSeleccionada, Mode=TwoWay}"
+                  CanUserAddRows="True"
+                  CanUserDeleteRows="False"
+                  AutoGenerateColumns="False"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="3"
+                  Margin="10" 
+                  AlternatingRowBackground="{DynamicResource AzulGrisBrush}" 
+                  Background="{DynamicResource GrisClaroBrush}"
+                  CanUserResizeRows="False"
+                  ColumnWidth="SizeToCells">
+            <!--KeyDown="DataGrid_KeyDown" PreviewKeyDown="DataGrid_KeyDown">-->
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding LaMascota.IDMASCOTA, Mode=TwoWay}" Header="IDMASCOTA" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding LaMascota.NOMBRE, Mode=TwoWay}" Header="NOMBRE" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding LaMascota.RAZA, Mode=TwoWay}" Header="RAZA" Width="SizeToHeader"/>
+                <DataGridTemplateColumn Header="FECHA NACIMIENTO" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LaMascota.FECHANACIMIENTO, StringFormat='dd/MM/yyyy'}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding LaMascota.FECHANACIMIENTO, StringFormat='dd/MM/yyyy'}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridComboBoxColumn ItemsSource="{Binding ListaPropietarios, Source={StaticResource VmMascotas}}"
+                                        DisplayMemberPath="ElCliente.NOMBRE"
+                                        SelectedValuePath="ElCliente.DNI"
+                                        SelectedValueBinding="{Binding LaMascota.PROPIETARIO}"
+                                        Header="DUEÑO" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

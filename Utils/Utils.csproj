@@ -63,7 +63,9 @@
   <ItemGroup>
     <Compile Include="CommandBotones.cs" />
     <Compile Include="CommandCerrar.cs" />
+    <Compile Include="DatosBotones.cs" />
     <Compile Include="HerramientasCifrado.cs" />
+    <Compile Include="NotifyUIBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

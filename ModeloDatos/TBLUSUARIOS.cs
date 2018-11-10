@@ -17,6 +17,6 @@ namespace ModeloDatos
         public int IDUSUARIO { get; set; }
         public string USUARIO { get; set; }
         public string PASS { get; set; }
-        public Nullable<int> NIVEL { get; set; }
+        public int NIVEL { get; set; }
     }
 }

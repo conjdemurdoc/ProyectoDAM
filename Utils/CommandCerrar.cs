@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Utils
 {
-    class CommandCerrar : ICommand
+    public class CommandCerrar : ICommand
     {
         private Action _Accion;
 

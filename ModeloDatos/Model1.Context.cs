@@ -30,8 +30,6 @@ namespace ModeloDatos
         public virtual DbSet<TBLMASCOTAS> TBLMASCOTAS { get; set; }
         public virtual DbSet<TBLPRODUCTOS> TBLPRODUCTOS { get; set; }
         public virtual DbSet<TBLPROVEEDORES> TBLPROVEEDORES { get; set; }
-        public virtual DbSet<TBLRECETAS> TBLRECETAS { get; set; }
-        public virtual DbSet<TBLSERVICIOS> TBLSERVICIOS { get; set; }
         public virtual DbSet<TBLTICKETS> TBLTICKETS { get; set; }
         public virtual DbSet<TBLUSUARIOS> TBLUSUARIOS { get; set; }
     }

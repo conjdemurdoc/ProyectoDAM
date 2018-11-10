@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Utils 
 {
-    class CommandBotones<T> : ICommand
+    public class CommandBotones<T> : ICommand
     {
         private Action<T> _AccionRealizar;
         private Func<T, bool> _AccionSePuedeHacer;

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VeterinariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VeterinariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TBLCITAPREVIA">
           <Key>
             <PropertyRef Name="ID" />
@@ -41,10 +41,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO" Type="int" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
           <Property Name="COSTE" Type="real" />
-          <Property Name="DISPONIBLE" Type="numeric" Precision="1" Scale="0" />
-          <Property Name="PROVEEDOR" Type="int" />
+          <Property Name="DISPONIBLE" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TBLPROVEEDORES">
           <Key>
@@ -52,26 +52,8 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EMPRESA" Type="varchar" MaxLength="50" />
-          <Property Name="CCONTACTO" Type="varchar" MaxLength="50" />
-          <Property Name="TCONTACTO" Type="numeric" Precision="9" Scale="0" />
-        </EntityType>
-        <EntityType Name="TBLRECETAS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FECHA" Type="date" />
-          <Property Name="MASCOTA" Type="int" />
-          <Property Name="COSTETOTAL" Type="real" />
-        </EntityType>
-        <EntityType Name="TBLSERVICIOS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
-          <Property Name="COSTE" Type="real" />
-          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CORREO" Type="varchar" MaxLength="50" />
+          <Property Name="TELEFONO" Type="numeric" Precision="9" Scale="0" />
         </EntityType>
         <EntityType Name="TBLTICKETS">
           <Key>
@@ -80,7 +62,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FECHA" Type="date" />
           <Property Name="CLIENTE" Type="varchar" MaxLength="9" />
-          <Property Name="COSTETOTAL" Type="real" />
+          <Property Name="PENDIENTE" Type="int" Nullable="false" />
+          <Property Name="PRODUCTO" Type="int" />
         </EntityType>
         <EntityType Name="TBLUSUARIOS">
           <Key>
@@ -89,9 +72,9 @@
           <Property Name="IDUSUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USUARIO" Type="varchar" MaxLength="20" />
           <Property Name="PASS" Type="varchar" MaxLength="20" />
-          <Property Name="NIVEL" Type="int" />
+          <Property Name="NIVEL" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__TBLCITAPR__CLIEN__4D94879B">
+        <Association Name="FK__TBLCITAPR__CLIEN__49C3F6B7">
           <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
           <End Role="TBLCITAPREVIA" Type="Self.TBLCITAPREVIA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -115,32 +98,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLPRODUC__PROVE__44FF419A">
-          <End Role="TBLPROVEEDORES" Type="Self.TBLPROVEEDORES" Multiplicity="0..1" />
-          <End Role="TBLPRODUCTOS" Type="Self.TBLPRODUCTOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBLPROVEEDORES">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TBLPRODUCTOS">
-              <PropertyRef Name="PROVEEDOR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TBLRECETA__MASCO__4AB81AF0">
-          <End Role="TBLMASCOTAS" Type="Self.TBLMASCOTAS" Multiplicity="0..1" />
-          <End Role="TBLRECETAS" Type="Self.TBLRECETAS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBLMASCOTAS">
-              <PropertyRef Name="IDMASCOTA" />
-            </Principal>
-            <Dependent Role="TBLRECETAS">
-              <PropertyRef Name="MASCOTA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TBLTICKET__CLIEN__47DBAE45">
-          <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
+        <Association Name="FK__TBLTICKET__CLIEN__44FF419A">
+          <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TBLTICKETS" Type="Self.TBLTICKETS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBLCLIENTES">
@@ -151,17 +112,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TBLTICKET__PRODU__46E78A0C">
+          <End Role="TBLPRODUCTOS" Type="Self.TBLPRODUCTOS" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TBLTICKETS" Type="Self.TBLTICKETS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLPRODUCTOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLTICKETS">
+              <PropertyRef Name="PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="VeterinariaModelStoreContainer">
           <EntitySet Name="TBLCITAPREVIA" EntityType="Self.TBLCITAPREVIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLCLIENTES" EntityType="Self.TBLCLIENTES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLMASCOTAS" EntityType="Self.TBLMASCOTAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLPRODUCTOS" EntityType="Self.TBLPRODUCTOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLPROVEEDORES" EntityType="Self.TBLPROVEEDORES" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TBLRECETAS" EntityType="Self.TBLRECETAS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TBLSERVICIOS" EntityType="Self.TBLSERVICIOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLTICKETS" EntityType="Self.TBLTICKETS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLUSUARIOS" EntityType="Self.TBLUSUARIOS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__TBLCITAPR__CLIEN__4D94879B" Association="Self.FK__TBLCITAPR__CLIEN__4D94879B">
+          <AssociationSet Name="FK__TBLCITAPR__CLIEN__49C3F6B7" Association="Self.FK__TBLCITAPR__CLIEN__49C3F6B7">
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLCITAPREVIA" EntitySet="TBLCITAPREVIA" />
           </AssociationSet>
@@ -169,24 +142,44 @@
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLMASCOTAS" EntitySet="TBLMASCOTAS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLPRODUC__PROVE__44FF419A" Association="Self.FK__TBLPRODUC__PROVE__44FF419A">
-            <End Role="TBLPROVEEDORES" EntitySet="TBLPROVEEDORES" />
-            <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TBLRECETA__MASCO__4AB81AF0" Association="Self.FK__TBLRECETA__MASCO__4AB81AF0">
-            <End Role="TBLMASCOTAS" EntitySet="TBLMASCOTAS" />
-            <End Role="TBLRECETAS" EntitySet="TBLRECETAS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TBLTICKET__CLIEN__47DBAE45" Association="Self.FK__TBLTICKET__CLIEN__47DBAE45">
+          <AssociationSet Name="FK__TBLTICKET__CLIEN__44FF419A" Association="Self.FK__TBLTICKET__CLIEN__44FF419A">
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
           </AssociationSet>
+          <AssociationSet Name="FK__TBLTICKET__PRODU__46E78A0C" Association="Self.FK__TBLTICKET__PRODU__46E78A0C">
+            <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
+            <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VeterinariaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="VeterinariaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLCITAPREVIA" EntityType="VeterinariaModel.TBLCITAPREVIA" />
+          <EntitySet Name="TBLCLIENTES" EntityType="VeterinariaModel.TBLCLIENTES" />
+          <EntitySet Name="TBLMASCOTAS" EntityType="VeterinariaModel.TBLMASCOTAS" />
+          <EntitySet Name="TBLPRODUCTOS" EntityType="VeterinariaModel.TBLPRODUCTOS" />
+          <EntitySet Name="TBLPROVEEDORES" EntityType="VeterinariaModel.TBLPROVEEDORES" />
+          <EntitySet Name="TBLTICKETS" EntityType="VeterinariaModel.TBLTICKETS" />
+          <EntitySet Name="TBLUSUARIOS" EntityType="VeterinariaModel.TBLUSUARIOS" />
+          <AssociationSet Name="FK__TBLCITAPR__CLIEN__49C3F6B7" Association="VeterinariaModel.FK__TBLCITAPR__CLIEN__49C3F6B7">
+            <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
+            <End Role="TBLCITAPREVIA" EntitySet="TBLCITAPREVIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBLMASCOT__PROPI__3C69FB99" Association="VeterinariaModel.FK__TBLMASCOT__PROPI__3C69FB99">
+            <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
+            <End Role="TBLMASCOTAS" EntitySet="TBLMASCOTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBLTICKET__CLIEN__44FF419A" Association="VeterinariaModel.FK__TBLTICKET__CLIEN__44FF419A">
+            <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
+            <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBLTICKET__PRODU__46E78A0C" Association="VeterinariaModel.FK__TBLTICKET__PRODU__46E78A0C">
+            <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
+            <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="TBLCITAPREVIA">
           <Key>
             <PropertyRef Name="ID" />
@@ -195,22 +188,22 @@
           <Property Name="FECHAREALIZADA" Type="DateTime" Precision="0" />
           <Property Name="FECHAFIJADA" Type="DateTime" Precision="0" />
           <Property Name="CLIENTE" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TBLCLIENTES" Relationship="Self.FK__TBLCITAPR__CLIEN__4D94879B" FromRole="TBLCITAPREVIA" ToRole="TBLCLIENTES" />
+          <NavigationProperty Name="TBLCLIENTES" Relationship="VeterinariaModel.FK__TBLCITAPR__CLIEN__49C3F6B7" FromRole="TBLCITAPREVIA" ToRole="TBLCLIENTES" />
         </EntityType>
         <EntityType Name="TBLCLIENTES">
           <Key>
             <PropertyRef Name="DNI" />
           </Key>
-          <Property Name="DNI" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="APELLIDOS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CODIGOPOSTAL" Type="Decimal" Precision="5" Scale="0" />
           <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FECHANACIMIENTO" Type="DateTime" Precision="0" />
           <Property Name="TELEFONO" Type="Decimal" Precision="9" Scale="0" />
-          <NavigationProperty Name="TBLCITAPREVIA" Relationship="Self.FK__TBLCITAPR__CLIEN__4D94879B" FromRole="TBLCLIENTES" ToRole="TBLCITAPREVIA" />
-          <NavigationProperty Name="TBLMASCOTAS" Relationship="Self.FK__TBLMASCOT__PROPI__3C69FB99" FromRole="TBLCLIENTES" ToRole="TBLMASCOTAS" />
-          <NavigationProperty Name="TBLTICKETS" Relationship="Self.FK__TBLTICKET__CLIEN__47DBAE45" FromRole="TBLCLIENTES" ToRole="TBLTICKETS" />
+          <NavigationProperty Name="TBLCITAPREVIA" Relationship="VeterinariaModel.FK__TBLCITAPR__CLIEN__49C3F6B7" FromRole="TBLCLIENTES" ToRole="TBLCITAPREVIA" />
+          <NavigationProperty Name="TBLMASCOTAS" Relationship="VeterinariaModel.FK__TBLMASCOT__PROPI__3C69FB99" FromRole="TBLCLIENTES" ToRole="TBLMASCOTAS" />
+          <NavigationProperty Name="TBLTICKETS" Relationship="VeterinariaModel.FK__TBLTICKET__CLIEN__44FF419A" FromRole="TBLCLIENTES" ToRole="TBLTICKETS" />
         </EntityType>
         <EntityType Name="TBLMASCOTAS">
           <Key>
@@ -221,19 +214,18 @@
           <Property Name="RAZA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FECHANACIMIENTO" Type="DateTime" Precision="0" />
           <Property Name="PROPIETARIO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TBLCLIENTES" Relationship="Self.FK__TBLMASCOT__PROPI__3C69FB99" FromRole="TBLMASCOTAS" ToRole="TBLCLIENTES" />
-          <NavigationProperty Name="TBLRECETAS" Relationship="Self.FK__TBLRECETA__MASCO__4AB81AF0" FromRole="TBLMASCOTAS" ToRole="TBLRECETAS" />
+          <NavigationProperty Name="TBLCLIENTES" Relationship="VeterinariaModel.FK__TBLMASCOT__PROPI__3C69FB99" FromRole="TBLMASCOTAS" ToRole="TBLCLIENTES" />
         </EntityType>
         <EntityType Name="TBLPRODUCTOS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO" Type="Int32" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="COSTE" Type="Single" />
-          <Property Name="DISPONIBLE" Type="Decimal" Precision="1" Scale="0" />
-          <Property Name="PROVEEDOR" Type="Int32" />
-          <NavigationProperty Name="TBLPROVEEDORES" Relationship="Self.FK__TBLPRODUC__PROVE__44FF419A" FromRole="TBLPRODUCTOS" ToRole="TBLPROVEEDORES" />
+          <Property Name="DISPONIBLE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLTICKETS" Relationship="VeterinariaModel.FK__TBLTICKET__PRODU__46E78A0C" FromRole="TBLPRODUCTOS" ToRole="TBLTICKETS" />
         </EntityType>
         <EntityType Name="TBLPROVEEDORES">
           <Key>
@@ -241,28 +233,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CCONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TCONTACTO" Type="Decimal" Precision="9" Scale="0" />
-          <NavigationProperty Name="TBLPRODUCTOS" Relationship="Self.FK__TBLPRODUC__PROVE__44FF419A" FromRole="TBLPROVEEDORES" ToRole="TBLPRODUCTOS" />
-        </EntityType>
-        <EntityType Name="TBLRECETAS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FECHA" Type="DateTime" Precision="0" />
-          <Property Name="MASCOTA" Type="Int32" />
-          <Property Name="COSTETOTAL" Type="Single" />
-          <NavigationProperty Name="TBLMASCOTAS" Relationship="Self.FK__TBLRECETA__MASCO__4AB81AF0" FromRole="TBLRECETAS" ToRole="TBLMASCOTAS" />
-        </EntityType>
-        <EntityType Name="TBLSERVICIOS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="COSTE" Type="Single" />
-          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="9" Scale="0" />
         </EntityType>
         <EntityType Name="TBLTICKETS">
           <Key>
@@ -271,8 +243,10 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FECHA" Type="DateTime" Precision="0" />
           <Property Name="CLIENTE" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="COSTETOTAL" Type="Single" />
-          <NavigationProperty Name="TBLCLIENTES" Relationship="Self.FK__TBLTICKET__CLIEN__47DBAE45" FromRole="TBLTICKETS" ToRole="TBLCLIENTES" />
+          <Property Name="PENDIENTE" Type="Int32" Nullable="false" />
+          <Property Name="PRODUCTO" Type="Int32" />
+          <NavigationProperty Name="TBLCLIENTES" Relationship="VeterinariaModel.FK__TBLTICKET__CLIEN__44FF419A" FromRole="TBLTICKETS" ToRole="TBLCLIENTES" />
+          <NavigationProperty Name="TBLPRODUCTOS" Relationship="VeterinariaModel.FK__TBLTICKET__PRODU__46E78A0C" FromRole="TBLTICKETS" ToRole="TBLPRODUCTOS" />
         </EntityType>
         <EntityType Name="TBLUSUARIOS">
           <Key>
@@ -281,11 +255,11 @@
           <Property Name="IDUSUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="USUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NIVEL" Type="Int32" />
+          <Property Name="NIVEL" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK__TBLCITAPR__CLIEN__4D94879B">
-          <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
-          <End Role="TBLCITAPREVIA" Type="Self.TBLCITAPREVIA" Multiplicity="*" />
+        <Association Name="FK__TBLCITAPR__CLIEN__49C3F6B7">
+          <End Type="VeterinariaModel.TBLCLIENTES" Role="TBLCLIENTES" Multiplicity="0..1" />
+          <End Type="VeterinariaModel.TBLCITAPREVIA" Role="TBLCITAPREVIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBLCLIENTES">
               <PropertyRef Name="DNI" />
@@ -296,8 +270,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__TBLMASCOT__PROPI__3C69FB99">
-          <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
-          <End Role="TBLMASCOTAS" Type="Self.TBLMASCOTAS" Multiplicity="*" />
+          <End Type="VeterinariaModel.TBLCLIENTES" Role="TBLCLIENTES" Multiplicity="0..1" />
+          <End Type="VeterinariaModel.TBLMASCOTAS" Role="TBLMASCOTAS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBLCLIENTES">
               <PropertyRef Name="DNI" />
@@ -307,9 +281,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLTICKET__CLIEN__47DBAE45">
-          <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
-          <End Role="TBLTICKETS" Type="Self.TBLTICKETS" Multiplicity="*" />
+        <Association Name="FK__TBLTICKET__CLIEN__44FF419A">
+          <End Type="VeterinariaModel.TBLCLIENTES" Role="TBLCLIENTES" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VeterinariaModel.TBLTICKETS" Role="TBLTICKETS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBLCLIENTES">
               <PropertyRef Name="DNI" />
@@ -319,61 +295,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLRECETA__MASCO__4AB81AF0">
-          <End Role="TBLMASCOTAS" Type="Self.TBLMASCOTAS" Multiplicity="0..1" />
-          <End Role="TBLRECETAS" Type="Self.TBLRECETAS" Multiplicity="*" />
+        <Association Name="FK__TBLTICKET__PRODU__46E78A0C">
+          <End Type="VeterinariaModel.TBLPRODUCTOS" Role="TBLPRODUCTOS" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VeterinariaModel.TBLTICKETS" Role="TBLTICKETS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TBLMASCOTAS">
-              <PropertyRef Name="IDMASCOTA" />
-            </Principal>
-            <Dependent Role="TBLRECETAS">
-              <PropertyRef Name="MASCOTA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TBLPRODUC__PROVE__44FF419A">
-          <End Role="TBLPROVEEDORES" Type="Self.TBLPROVEEDORES" Multiplicity="0..1" />
-          <End Role="TBLPRODUCTOS" Type="Self.TBLPRODUCTOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBLPROVEEDORES">
+            <Principal Role="TBLPRODUCTOS">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="TBLPRODUCTOS">
-              <PropertyRef Name="PROVEEDOR" />
+            <Dependent Role="TBLTICKETS">
+              <PropertyRef Name="PRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VeterinariaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TBLCITAPREVIA" EntityType="Self.TBLCITAPREVIA" />
-          <EntitySet Name="TBLCLIENTES" EntityType="Self.TBLCLIENTES" />
-          <EntitySet Name="TBLMASCOTAS" EntityType="Self.TBLMASCOTAS" />
-          <EntitySet Name="TBLPRODUCTOS" EntityType="Self.TBLPRODUCTOS" />
-          <EntitySet Name="TBLPROVEEDORES" EntityType="Self.TBLPROVEEDORES" />
-          <EntitySet Name="TBLRECETAS" EntityType="Self.TBLRECETAS" />
-          <EntitySet Name="TBLSERVICIOS" EntityType="Self.TBLSERVICIOS" />
-          <EntitySet Name="TBLTICKETS" EntityType="Self.TBLTICKETS" />
-          <EntitySet Name="TBLUSUARIOS" EntityType="Self.TBLUSUARIOS" />
-          <AssociationSet Name="FK__TBLCITAPR__CLIEN__4D94879B" Association="Self.FK__TBLCITAPR__CLIEN__4D94879B">
-            <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
-            <End Role="TBLCITAPREVIA" EntitySet="TBLCITAPREVIA" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TBLMASCOT__PROPI__3C69FB99" Association="Self.FK__TBLMASCOT__PROPI__3C69FB99">
-            <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
-            <End Role="TBLMASCOTAS" EntitySet="TBLMASCOTAS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TBLTICKET__CLIEN__47DBAE45" Association="Self.FK__TBLTICKET__CLIEN__47DBAE45">
-            <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
-            <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TBLRECETA__MASCO__4AB81AF0" Association="Self.FK__TBLRECETA__MASCO__4AB81AF0">
-            <End Role="TBLMASCOTAS" EntitySet="TBLMASCOTAS" />
-            <End Role="TBLRECETAS" EntitySet="TBLRECETAS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TBLPRODUC__PROVE__44FF419A" Association="Self.FK__TBLPRODUC__PROVE__44FF419A">
-            <End Role="TBLPROVEEDORES" EntitySet="TBLPROVEEDORES" />
-            <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -383,95 +318,76 @@
           <EntitySetMapping Name="TBLCITAPREVIA">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLCITAPREVIA">
               <MappingFragment StoreEntitySet="TBLCITAPREVIA">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FECHAREALIZADA" ColumnName="FECHAREALIZADA" />
-                <ScalarProperty Name="FECHAFIJADA" ColumnName="FECHAFIJADA" />
                 <ScalarProperty Name="CLIENTE" ColumnName="CLIENTE" />
+                <ScalarProperty Name="FECHAFIJADA" ColumnName="FECHAFIJADA" />
+                <ScalarProperty Name="FECHAREALIZADA" ColumnName="FECHAREALIZADA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TBLCLIENTES">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLCLIENTES">
               <MappingFragment StoreEntitySet="TBLCLIENTES">
-                <ScalarProperty Name="DNI" ColumnName="DNI" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
-                <ScalarProperty Name="CODIGOPOSTAL" ColumnName="CODIGOPOSTAL" />
-                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
-                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
                 <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="CODIGOPOSTAL" ColumnName="CODIGOPOSTAL" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TBLMASCOTAS">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLMASCOTAS">
               <MappingFragment StoreEntitySet="TBLMASCOTAS">
-                <ScalarProperty Name="IDMASCOTA" ColumnName="IDMASCOTA" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="RAZA" ColumnName="RAZA" />
-                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
                 <ScalarProperty Name="PROPIETARIO" ColumnName="PROPIETARIO" />
+                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+                <ScalarProperty Name="RAZA" ColumnName="RAZA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="IDMASCOTA" ColumnName="IDMASCOTA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TBLPRODUCTOS">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLPRODUCTOS">
               <MappingFragment StoreEntitySet="TBLPRODUCTOS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="COSTE" ColumnName="COSTE" />
                 <ScalarProperty Name="DISPONIBLE" ColumnName="DISPONIBLE" />
-                <ScalarProperty Name="PROVEEDOR" ColumnName="PROVEEDOR" />
+                <ScalarProperty Name="COSTE" ColumnName="COSTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TBLPROVEEDORES">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLPROVEEDORES">
               <MappingFragment StoreEntitySet="TBLPROVEEDORES">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
                 <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
-                <ScalarProperty Name="CCONTACTO" ColumnName="CCONTACTO" />
-                <ScalarProperty Name="TCONTACTO" ColumnName="TCONTACTO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLRECETAS">
-            <EntityTypeMapping TypeName="VeterinariaModel.TBLRECETAS">
-              <MappingFragment StoreEntitySet="TBLRECETAS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="MASCOTA" ColumnName="MASCOTA" />
-                <ScalarProperty Name="COSTETOTAL" ColumnName="COSTETOTAL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLSERVICIOS">
-            <EntityTypeMapping TypeName="VeterinariaModel.TBLSERVICIOS">
-              <MappingFragment StoreEntitySet="TBLSERVICIOS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="COSTE" ColumnName="COSTE" />
-                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TBLTICKETS">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLTICKETS">
               <MappingFragment StoreEntitySet="TBLTICKETS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="PRODUCTO" ColumnName="PRODUCTO" />
+                <ScalarProperty Name="PENDIENTE" ColumnName="PENDIENTE" />
                 <ScalarProperty Name="CLIENTE" ColumnName="CLIENTE" />
-                <ScalarProperty Name="COSTETOTAL" ColumnName="COSTETOTAL" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TBLUSUARIOS">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLUSUARIOS">
               <MappingFragment StoreEntitySet="TBLUSUARIOS">
-                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
-                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
-                <ScalarProperty Name="PASS" ColumnName="PASS" />
                 <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

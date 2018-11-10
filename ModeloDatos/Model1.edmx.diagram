@@ -4,21 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4cb906b43781406e8eac739e112f1666" Name="Diagram1">
-        <EntityTypeShape EntityType="VeterinariaModel.TBLCITAPREVIA" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLCLIENTES" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLMASCOTAS" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLPRODUCTOS" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLPROVEEDORES" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLRECETAS" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLSERVICIOS" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLTICKETS" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="VeterinariaModel.TBLUSUARIOS" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <AssociationConnector Association="VeterinariaModel.FK__TBLCITAPR__CLIEN__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="VeterinariaModel.FK__TBLMASCOT__PROPI__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="VeterinariaModel.FK__TBLTICKET__CLIEN__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="VeterinariaModel.FK__TBLRECETA__MASCO__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="VeterinariaModel.FK__TBLPRODUC__PROVE__44FF419A" ManuallyRouted="false" />
+      <Diagram DiagramId="4cb906b43781406e8eac739e112f1666" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="VeterinariaModel.TBLCITAPREVIA" Width="1.5" PointX="3" PointY="10.375" />
+        <EntityTypeShape EntityType="VeterinariaModel.TBLCLIENTES" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="VeterinariaModel.TBLMASCOTAS" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="VeterinariaModel.TBLPRODUCTOS" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="VeterinariaModel.TBLPROVEEDORES" Width="1.5" PointX="5.75" PointY="2.375" />
+        <EntityTypeShape EntityType="VeterinariaModel.TBLTICKETS" Width="1.5" PointX="6" PointY="5.625" />
+        <EntityTypeShape EntityType="VeterinariaModel.TBLUSUARIOS" Width="1.5" PointX="2.75" PointY="7.375" />
+        <AssociationConnector Association="VeterinariaModel.FK__TBLCITAPR__CLIEN__49C3F6B7" />
+        <AssociationConnector Association="VeterinariaModel.FK__TBLMASCOT__PROPI__3C69FB99" />
+        <AssociationConnector Association="VeterinariaModel.FK__TBLTICKET__CLIEN__44FF419A" />
+        <AssociationConnector Association="VeterinariaModel.FK__TBLTICKET__PRODU__46E78A0C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

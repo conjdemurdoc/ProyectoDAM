@@ -14,19 +14,19 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Veterinaria.CodigoDelegado;
 
-namespace Veterinaria
+namespace Veterinaria.Vistas
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para GestionMascotas.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GestionMascotas : UserControl
     {
-        MainWindowViewModel mwvm;
-        public MainWindow()
+        GestionMascotasViewModel viewModel;
+        public GestionMascotas()
         {
             InitializeComponent();
-            mwvm = new MainWindowViewModel();
-            DataContext = mwvm;
+            viewModel = new GestionMascotasViewModel();
+            DataContext = viewModel;
         }
     }
 }

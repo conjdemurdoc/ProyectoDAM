@@ -14,18 +14,9 @@ namespace ModeloDatos
     
     public partial class TBLPROVEEDORES
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TBLPROVEEDORES()
-        {
-            this.TBLPRODUCTOS = new HashSet<TBLPRODUCTOS>();
-        }
-    
         public int ID { get; set; }
         public string EMPRESA { get; set; }
-        public string CCONTACTO { get; set; }
-        public Nullable<decimal> TCONTACTO { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBLPRODUCTOS> TBLPRODUCTOS { get; set; }
+        public string CORREO { get; set; }
+        public Nullable<decimal> TELEFONO { get; set; }
     }
 }

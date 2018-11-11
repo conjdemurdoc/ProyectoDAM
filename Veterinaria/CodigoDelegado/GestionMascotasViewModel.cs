@@ -43,7 +43,16 @@ namespace Veterinaria.CodigoDelegado
             }
             catch (Exception e)
             {
-                Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (GetData)", Logs.constantes.EXCEPTION_TYPE);
+                if (e.InnerException != null)
+                {
+                    Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (GetData)", Logs.constantes.EXCEPTION_TYPE);
+
+                }
+                else
+                {
+                    Logs.Logs.EscribirLog(e.Message, ToString() + " (GetData)", Logs.constantes.EXCEPTION_TYPE);
+
+                }
             }
         }
 
@@ -68,7 +77,16 @@ namespace Veterinaria.CodigoDelegado
                 }
                 catch (Exception e)
                 {
-                    Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (ConfirmarCambios)", Logs.constantes.EXCEPTION_TYPE);
+                    if(e.InnerException != null)
+                    {
+                        Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (ConfirmarCambios)", Logs.constantes.EXCEPTION_TYPE);
+
+                    }
+                    else
+                    {
+                        Logs.Logs.EscribirLog(e.Message, ToString() + " (ConfirmarCambios)", Logs.constantes.EXCEPTION_TYPE);
+
+                    }
                 }
             }
             else

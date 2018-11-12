@@ -11,32 +11,33 @@ using System.Windows;
 using System.Windows.Media;
 using Utils;
 
+
 namespace Veterinaria.CodigoDelegado
 {
-    class GestionClientesViewModel :CrudVMBase
+    class GestionProveedoresViewModel : CrudVMBase
     {
-        public ClienteVM ClienteSeleccionado { get; set; }
-        public ObservableCollection<ClienteVM> ListaClientes { get; set; }
+        public ProveedorVM ProveeodrSeleccionado { get; set; }
+        public ObservableCollection<ProveedorVM> ListaProveedores { get; set; }
         public ObservableCollection<DatosBotones> Datos { get; set; }
         public CommandBotones<string> BotonesCommand { get; private set; }
         protected async override void GetData()
         {
             try
             {
-                ObservableCollection<ClienteVM> listausuarios = new ObservableCollection<ClienteVM>();
-                var clientes = await (from p in db.TBLCLIENTES
-                                      orderby p.DNI
-                                      select p).ToListAsync();
-                foreach (TBLCLIENTES cliente in clientes)
+                ObservableCollection<ProveedorVM> listaproveedores = new ObservableCollection<ProveedorVM>();
+                var proveedores = await (from p in db.TBLPROVEEDORES
+                                       orderby p.ID
+                                       select p).ToListAsync();
+                foreach (TBLPROVEEDORES proveedor in proveedores)
                 {
-                    listausuarios.Add(new ClienteVM { IsNew = false, ElCliente = cliente });
+                    listaproveedores.Add(new ProveedorVM { IsNew = false, ElProveedor = proveedor });
                 }
-                ListaClientes = listausuarios;
-                RaisePropertyChanged("ListaClientes");
+                ListaProveedores = listaproveedores;
+                RaisePropertyChanged("ListaProveedores");
             }
             catch (Exception e)
             {
-                if(e.InnerException != null)
+                if (e.InnerException != null)
                 {
                     Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (GetData)", Logs.constantes.EXCEPTION_TYPE);
 
@@ -51,14 +52,14 @@ namespace Veterinaria.CodigoDelegado
         protected override void ConfirmarCambios()
         {
             string msg = string.Empty;
-            var insertado = (from c in ListaClientes
+            var insertado = (from c in ListaProveedores
                              where c.IsNew
                              select c).ToList();
             if (insertado.Count > 0)
             {
-                foreach (ClienteVM c in insertado)
+                foreach (ProveedorVM c in insertado)
                 {
-                    db.TBLCLIENTES.Add(c.ElCliente);
+                    db.TBLPROVEEDORES.Add(c.ElProveedor);
                 }
                 try
                 {
@@ -67,27 +68,22 @@ namespace Veterinaria.CodigoDelegado
                 }
                 catch (Exception e)
                 {
-                    if(e.InnerException != null)
+                    if (e.InnerException != null)
                     {
                         Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (ConfirmarCambios)", Logs.constantes.EXCEPTION_TYPE);
                     }
                     else
                     {
                         Logs.Logs.EscribirLog(e.Message, ToString() + " (ConfirmarCambios)", Logs.constantes.EXCEPTION_TYPE);
+
                     }
                 }
             }
-            else
-            {
-                msg = "Nada que insertar";
-            }
-            if (msg != string.Empty)
-                MessageBox.Show(msg);
         }
         protected override void BorrarActual()
         {
             string msg = string.Empty;
-            if (ClienteSeleccionado != null)
+            if (ProveeodrSeleccionado != null)
             {
                 int Existe = ComprobarExistencia();
                 if (Existe < 0)
@@ -96,14 +92,14 @@ namespace Veterinaria.CodigoDelegado
                 }
                 else if (Existe > 0)
                 {
-                    msg = string.Format("no se puede borrar, tiene {0} mascotas aun registradas", Existe);
+                    msg = string.Format("no se puede borrar, tiene {0} pedidos aun registradas", Existe);
                 }
                 else
                 {
-                    db.TBLCLIENTES.Remove(ClienteSeleccionado.ElCliente);
-                    ListaClientes.Remove(ClienteSeleccionado);
+                    db.TBLPROVEEDORES.Remove(ProveeodrSeleccionado.ElProveedor);
+                    ListaProveedores.Remove(ProveeodrSeleccionado);
                     db.SaveChanges();
-                    RaisePropertyChanged("ListaClientes");
+                    RaisePropertyChanged("ListaProveedores");
                     msg = "Borrado";
                 }
             }
@@ -115,18 +111,15 @@ namespace Veterinaria.CodigoDelegado
         }
         private int ComprobarExistencia()
         {
-            var prod = db.TBLCLIENTES.Find(ClienteSeleccionado.ElCliente.DNI);
-            if (prod == null || ClienteSeleccionado.IsNew) //solo lo borra de la base de datos si no es null ni nuevo (IsNew)
+            var prod = db.TBLPRODUCTOS.Find(ProveeodrSeleccionado.ElProveedor.ID);
+            if (prod == null || ProveeodrSeleccionado.IsNew)
             {
                 return -1;
             }
-            int linesCount = db.Entry(prod)
-                               .Collection(p => p.TBLMASCOTAS)
-                               .Query()
-                               .Count();
-            return linesCount;
+            //TEMPORAL
+            return 0;
         }
-        public GestionClientesViewModel()
+        public GestionArticulosViewModel()
             : base()
         {
             BotonesCommand = new CommandBotones<string>(ControlBotones);

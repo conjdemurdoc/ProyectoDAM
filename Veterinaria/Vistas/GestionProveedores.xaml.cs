@@ -17,15 +17,15 @@ using Veterinaria.CodigoDelegado;
 namespace Veterinaria.Vistas
 {
     /// <summary>
-    /// Lógica de interacción para GestionClientes.xaml
+    /// Lógica de interacción para GestionProveedores.xaml
     /// </summary>
-    public partial class GestionClientes : UserControl
+    public partial class GestionProveedores : UserControl
     {
-        GestionClientesViewModel viewModel;
-        public GestionClientes()
+        GestionProveedoresViewModel viewModel;
+        public GestionProveedores()
         {
             InitializeComponent();
-            viewModel = new GestionClientesViewModel();
+            viewModel = new GestionProveedoresViewModel();
             DataContext = viewModel;
         }
         private void DataGrid_KeyDown(object sender, KeyEventArgs e)

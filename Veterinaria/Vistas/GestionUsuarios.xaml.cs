@@ -47,7 +47,6 @@ namespace Veterinaria.Vistas
                     {
                         viewModel.ControlBotones("Commit");
                         e.Handled = true;
-                        //MessageBox.Show("Commit");
                     }
                     break;
             }

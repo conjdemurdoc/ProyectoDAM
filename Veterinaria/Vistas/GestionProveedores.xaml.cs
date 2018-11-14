@@ -40,9 +40,12 @@ namespace Veterinaria.Vistas
                     viewModel.ControlBotones("Refresh");
                     e.Handled = true;
                     break;
-                case Key.F4:
-                    viewModel.ControlBotones("Commit");
-                    e.Handled = true;
+                case Key.S:
+                    if (Keyboard.Modifiers == ModifierKeys.Control)
+                    {
+                        viewModel.ControlBotones("Commit");
+                        e.Handled = true;
+                    }
                     break;
             }
         }

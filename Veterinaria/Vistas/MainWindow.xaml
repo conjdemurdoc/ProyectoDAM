@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Veterinaria"
         mc:Ignorable="d" Style="{DynamicResource WindowFont}"
-        Title="Menú principal" Height="500" Width="1000" ResizeMode="CanMinimize" Background="{DynamicResource PseudoVerdeBrush}">
+        Title="Menú principal" Height="600" Width="1200" ResizeMode="CanMinimize" Background="{DynamicResource PseudoVerdeBrush}">
     <Window.Resources>
         <!-- tamaño maximo del contenido del user control, teniendo en cuenta la anchura = 1000, es 750, y la altura es 500 (la misma que el formulario original, éste)-->
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="36*"/>
+            <ColumnDefinition Width="37*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -22,7 +22,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="1" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="10"/>
@@ -59,7 +59,7 @@
                              Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}" >
                         <Label Foreground="White" HorizontalAlignment="Center" Content="Proveedores"/>
                     </Button>
-                    <Button x:Name="btnProductos" Margin="10,0,10,10"
+                    <Button x:Name="btnArticulos" Margin="10,0,10,10"
                              Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}" >
                         <Label Foreground="White" HorizontalAlignment="Center" Content="Productos"/>
                     </Button>
@@ -84,8 +84,17 @@
                     </BulletDecorator>
                 </Expander.Header>
                 <StackPanel>
-                    <Button x:Name="btnFactura" Margin="10" Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}">
-                        <Label Foreground="white" HorizontalAlignment="Center" Content="BotonCabecera2"/>
+                    <Button x:Name="btnPedirCita" Margin="10"
+                            Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}">
+                        <Label Foreground="white" HorizontalAlignment="Center" Content="Añadir cita"/>
+                    </Button>
+                    <Button x:Name="btnVerCita" Margin="10,0,10,10"
+                            Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}">
+                        <Label Foreground="white" HorizontalAlignment="Center" Content="Citas pendientes"/>
+                    </Button>
+                    <Button x:Name="btmCobrar" Margin="10,0,10,10"
+                            Command="{Binding NavCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}" Style="{Binding Mode=OneWay, Source={StaticResource BotonBase}}">
+                        <Label Foreground="white" HorizontalAlignment="Center" Content="Cobrar"/>
                     </Button>
                 </StackPanel>
             </Expander>

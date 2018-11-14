@@ -63,7 +63,7 @@
                   AlternatingRowBackground="{DynamicResource AzulGrisBrush}" 
                   Background="{DynamicResource GrisClaroBrush}"
                   CanUserResizeRows="False"
-                  ColumnWidth="SizeToCells">
+                  ColumnWidth="SizeToCells"  PreviewKeyDown="DataGrid_KeyDown">
             <!--KeyDown="DataGrid_KeyDown" PreviewKeyDown="DataGrid_KeyDown">-->
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding LaMascota.IDMASCOTA, Mode=TwoWay}" Header="IDMASCOTA" Width="SizeToHeader"/>

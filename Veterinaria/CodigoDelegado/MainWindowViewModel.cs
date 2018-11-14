@@ -54,12 +54,25 @@ namespace Veterinaria.CodigoDelegado
                     RaisePropertyChanged("VistaContenida");
                     break;
                 case "btnProveedores":
-                    _ControlBotones(""); //temporal hasta la implementación del boton
+                    VistaContenida = new GestionProveedores();
+                    RaisePropertyChanged("VistaContenida");
                     break;
-                case "btnProductos":
-                    _ControlBotones(""); //temporal hasta la implementación del boton
+                case "btnArticulos":
+                    VistaContenida = new GestionArticulos();
+                    RaisePropertyChanged("Vistacontenida");
                     break;
                 case "btnServicios":
+                    VistaContenida = new GestionServicios();
+                    RaisePropertyChanged("Vistacontenida");
+                    break;
+                case "btnPedirCita":
+                    VistaContenida = new PedirCita();
+                    RaisePropertyChanged("Vistacontenida");
+                    break;
+                case "btnVerCita":
+                    _ControlBotones(""); //temporal hasta la implementación del boton
+                    break;
+                case "btmCobrar":
                     _ControlBotones(""); //temporal hasta la implementación del boton
                     break;
                 default:

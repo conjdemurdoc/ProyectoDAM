@@ -20,7 +20,6 @@ namespace Veterinaria.CodigoDelegado
         public ObservableCollection<ClienteVM> ListaPropietarios { get; set; }
         public ObservableCollection<DatosBotones> Datos { get; set; }
         public CommandBotones<string> BotonesCommand { get; private set; }
-        public string DniPropietario { get; set; }
         protected async override void GetData()
         {
             try
@@ -150,7 +149,14 @@ namespace Veterinaria.CodigoDelegado
             }
             catch (Exception e)
             {
-                Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (CargarPropietarios)", Logs.constantes.EXCEPTION_TYPE);
+                if (e.InnerException != null)
+                {
+                    Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (CargarPropietarios)", Logs.constantes.EXCEPTION_TYPE);
+                }
+                else
+                {
+                    Logs.Logs.EscribirLog(e.Message, ToString() + " (CargarPropietarios)", Logs.constantes.EXCEPTION_TYPE);
+                }
             }
         }
         public GestionMascotasViewModel()

@@ -55,7 +55,7 @@ namespace Veterinaria.CodigoDelegado
             var insertado = (from c in ListaProveedores
                              where c.IsNew
                              select c).ToList();
-            if (insertado.Count > 0)
+            if (db.ChangeTracker.HasChanges() || insertado.Count > 0)
             {
                 foreach (ProveedorVM c in insertado)
                 {
@@ -119,7 +119,7 @@ namespace Veterinaria.CodigoDelegado
             //TEMPORAL
             return 0;
         }
-        public GestionArticulosViewModel()
+        public GestionProveedoresViewModel()
             : base()
         {
             BotonesCommand = new CommandBotones<string>(ControlBotones);

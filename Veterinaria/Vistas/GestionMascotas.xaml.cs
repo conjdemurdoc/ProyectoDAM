@@ -28,5 +28,26 @@ namespace Veterinaria.Vistas
             viewModel = new GestionMascotasViewModel();
             DataContext = viewModel;
         }
+        private void DataGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Delete:
+                    viewModel.ControlBotones("Delete");
+                    e.Handled = true;
+                    break;
+                case Key.F5:
+                    viewModel.ControlBotones("Refresh");
+                    e.Handled = true;
+                    break;
+                case Key.S:
+                    if (Keyboard.Modifiers == ModifierKeys.Control)
+                    {
+                        viewModel.ControlBotones("Commit");
+                        e.Handled = true;
+                    }
+                    break;
+            }
+        }
     }
 }

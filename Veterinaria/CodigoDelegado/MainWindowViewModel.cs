@@ -70,10 +70,12 @@ namespace Veterinaria.CodigoDelegado
                     RaisePropertyChanged("Vistacontenida");
                     break;
                 case "btnVerCita":
-                    _ControlBotones(""); //temporal hasta la implementación del boton
+                    VistaContenida = new VerCita();
+                    RaisePropertyChanged("Vistacontenida");
                     break;
                 case "btmCobrar":
-                    _ControlBotones(""); //temporal hasta la implementación del boton
+                    VistaContenida = new Cobrar();
+                    RaisePropertyChanged("Vistacontenida");
                     break;
                 default:
                     Console.WriteLine("boton no implementado, date caña julian");

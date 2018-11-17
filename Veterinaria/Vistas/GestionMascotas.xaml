@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Veterinaria.Vistas"
              xmlns:vm="clr-namespace:Veterinaria.CodigoDelegado"
              mc:Ignorable="d" Style="{DynamicResource UserFont}"
-        Height="400" Width="650" Background="{DynamicResource PseudoVerdeBrush }">
+        Height="400" Width="550" Background="{DynamicResource PseudoVerdeBrush }">
     <UserControl.Resources>
         <vm:GestionMascotasViewModel x:Key="VmMascotas"/>
     </UserControl.Resources>
@@ -66,10 +66,10 @@
                   ColumnWidth="SizeToCells"  PreviewKeyDown="DataGrid_KeyDown">
             <!--KeyDown="DataGrid_KeyDown" PreviewKeyDown="DataGrid_KeyDown">-->
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding LaMascota.IDMASCOTA, Mode=TwoWay}" Header="IDMASCOTA" Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding LaMascota.NOMBRE, Mode=TwoWay}" Header="NOMBRE" Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding LaMascota.RAZA, Mode=TwoWay}" Header="RAZA" Width="SizeToHeader"/>
-                <DataGridTemplateColumn Header="FECHA NACIMIENTO" Width="SizeToHeader">
+                <DataGridTextColumn Binding="{Binding LaMascota.IDMASCOTA, Mode=TwoWay}" Header="ID" Width="*"/>
+                <DataGridTextColumn Binding="{Binding LaMascota.NOMBRE, Mode=TwoWay}" Header="NOMBRE" Width="*"/>
+                <DataGridTextColumn Binding="{Binding LaMascota.RAZA, Mode=TwoWay}" Header="RAZA" Width="*"/>
+                <DataGridTemplateColumn Header="FECHA NACIMIENTO" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding LaMascota.FECHANACIMIENTO, StringFormat='dd/MM/yyyy'}" />
@@ -85,7 +85,7 @@
                                         DisplayMemberPath="ElCliente.NOMBRE"
                                         SelectedValuePath="ElCliente.DNI"
                                         SelectedValueBinding="{Binding LaMascota.PROPIETARIO}"
-                                        Header="DUEÑO" Width="SizeToHeader"/>
+                                        Header="DUEÑO" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

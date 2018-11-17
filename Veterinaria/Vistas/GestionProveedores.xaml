@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Veterinaria.Vistas"
              mc:Ignorable="d" Style="{DynamicResource UserFont}"
-        Height="400" Width="650" Background="{DynamicResource PseudoVerdeBrush }">
+        Height="400" Width="450" Background="{DynamicResource PseudoVerdeBrush }">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -61,10 +61,10 @@
                   CanUserResizeRows="False"
                   ColumnWidth="SizeToCells" PreviewKeyDown="DataGrid_KeyDown">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding ElProveedor.ID, Mode=TwoWay}" Header="NIF" Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding ElProveedor.EMPRESA, Mode=TwoWay}" Header="EMPRESA" Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding ElProveedor.CORREO, Mode=TwoWay}" Header="CORREO" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn Binding="{Binding ElProveedor.TELEFONO, Mode=TwoWay}" Header="TELEFONO" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn Binding="{Binding ElProveedor.ID, Mode=TwoWay}" Header="NIF" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ElProveedor.EMPRESA, Mode=TwoWay}" Header="EMPRESA" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ElProveedor.CORREO, Mode=TwoWay}" Header="CORREO" Width="*"/>
+                <DataGridCheckBoxColumn Binding="{Binding ElProveedor.TELEFONO, Mode=TwoWay}" Header="TELEFONO" Width="*"/>
                 <!--<DataGridComboBoxColumn ItemsSource="{Binding Cosas}" SelectedValueBinding="{Binding Seleccionado}" Header="LISTADECOSAS" Width="SizeToHeader"/> a probar en casa en las relaciones entre tablas-->
             </DataGrid.Columns>
         </DataGrid>

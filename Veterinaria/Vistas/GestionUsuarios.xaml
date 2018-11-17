@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Veterinaria.Vistas"
              mc:Ignorable="d" Style="{DynamicResource UserFont}"
-        Height="400" Width="400" Background="{DynamicResource PseudoVerdeBrush }">
+        Height="400" Width="410" Background="{DynamicResource PseudoVerdeBrush }">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -61,9 +61,9 @@
                   CanUserResizeRows="False"
                   ColumnWidth="SizeToCells" KeyDown="DataGrid_KeyDown" PreviewKeyDown="DataGrid_KeyDown">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Usuario.USUARIO, Mode=TwoWay}" Header="USUARIO" Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding Usuario.PASS, Mode=TwoWay}" Header="CLAVE" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn Binding="{Binding Usuario.NIVEL, Mode=TwoWay}" Header="ADMINISTRADOR" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding Usuario.USUARIO, Mode=TwoWay}" Header="USUARIO" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Usuario.PASS, Mode=TwoWay}" Header="CLAVE" Width="*"/>
+                <DataGridCheckBoxColumn Binding="{Binding Usuario.NIVEL, Mode=TwoWay}" Header="ADMINISTRADOR" Width="*"/>
                 <!--<DataGridComboBoxColumn ItemsSource="{Binding Cosas}" SelectedValueBinding="{Binding Seleccionado}" Header="LISTADECOSAS" Width="SizeToHeader"/> a probar en casa en las relaciones entre tablas-->
             </DataGrid.Columns>
         </DataGrid>

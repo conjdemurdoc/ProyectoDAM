@@ -11,31 +11,30 @@ using System.Windows;
 using System.Windows.Media;
 using Utils;
 
-
 namespace Veterinaria.CodigoDelegado
 {
-    class GestionProveedoresViewModel : CrudVMBase
+    class GestionArticulosViewModel :CrudVMBase
     {
-        public ProveedorVM ProveeodrSeleccionado { get; set; }
-        public ObservableCollection<ProveedorVM> ListaProveedores { get; set; }
+        public ProductoVM ArticuloSeleccionado { get; set; }
+        public ObservableCollection<ProductoVM> ListaArticulos { get; set; }
         public ObservableCollection<DatosBotones> Datos { get; set; }
         public CommandBotones<string> BotonesCommand { get; private set; }
         protected async override void GetData()
         {
             try
             {
-                ObservableCollection<ProveedorVM> listaproveedores = new ObservableCollection<ProveedorVM>();
-                var proveedores = await (from p in db.TBLPROVEEDORES
+                ObservableCollection<ProductoVM> listaproductos = new ObservableCollection<ProductoVM>();
+                var productos = await (from p in db.TBLPRODUCTOS
+                                       where p.TIPO == 0
                                        orderby p.ID
                                        select p).ToListAsync();
-                foreach (TBLPROVEEDORES proveedor in proveedores)
+                foreach(TBLPRODUCTOS articulo in productos)
                 {
-                    listaproveedores.Add(new ProveedorVM { IsNew = false, ElProveedor = proveedor });
+                    listaproductos.Add(new ProductoVM { IsNew = false, ElProducto = articulo });
                 }
-                ListaProveedores = listaproveedores;
-                RaisePropertyChanged("ListaProveedores");
-            }
-            catch (Exception e)
+                ListaArticulos = listaproductos;
+                RaisePropertyChanged("ListaArticulos");
+            }catch (Exception e)
             {
                 if (e.InnerException != null)
                 {
@@ -52,14 +51,15 @@ namespace Veterinaria.CodigoDelegado
         protected override void ConfirmarCambios()
         {
             string msg = string.Empty;
-            var insertado = (from c in ListaProveedores
+            var insertado = (from c in ListaArticulos
                              where c.IsNew
                              select c).ToList();
-            if (db.ChangeTracker.HasChanges() || insertado.Count > 0)
+            if(db.ChangeTracker.HasChanges() || insertado.Count > 0)
             {
-                foreach (ProveedorVM c in insertado)
+                foreach (ProductoVM c in insertado)
                 {
-                    db.TBLPROVEEDORES.Add(c.ElProveedor);
+                    c.ElProducto.TIPO = 0;
+                    db.TBLPRODUCTOS.Add(c.ElProducto);
                 }
                 try
                 {
@@ -89,10 +89,10 @@ namespace Veterinaria.CodigoDelegado
         protected override void BorrarActual()
         {
             string msg = string.Empty;
-            if (ProveeodrSeleccionado != null)
+            if(ArticuloSeleccionado != null)
             {
                 int Existe = ComprobarExistencia();
-                if (Existe < 0)
+                if(Existe < 0)
                 {
                     msg = "No se puede borrar porque no se ha insertado en la base de datos";
                 }
@@ -102,10 +102,10 @@ namespace Veterinaria.CodigoDelegado
                 }
                 else
                 {
-                    db.TBLPROVEEDORES.Remove(ProveeodrSeleccionado.ElProveedor);
-                    ListaProveedores.Remove(ProveeodrSeleccionado);
+                    db.TBLPRODUCTOS.Remove(ArticuloSeleccionado.ElProducto);
+                    ListaArticulos.Remove(ArticuloSeleccionado);
                     db.SaveChanges();
-                    RaisePropertyChanged("ListaProveedores");
+                    RaisePropertyChanged("ListaArticulos");
                     msg = "Borrado";
                 }
             }
@@ -117,16 +117,16 @@ namespace Veterinaria.CodigoDelegado
         }
         private int ComprobarExistencia()
         {
-            var prod = db.TBLPRODUCTOS.Find(ProveeodrSeleccionado.ElProveedor.ID);
-            if (prod == null || ProveeodrSeleccionado.IsNew)
+            var prod = db.TBLPRODUCTOS.Find(ArticuloSeleccionado.ElProducto.ID);
+            if (prod == null || ArticuloSeleccionado .IsNew)
             {
                 return -1;
             }
             //TEMPORAL
             return 0;
         }
-        public GestionProveedoresViewModel()
-            : base()
+        public GestionArticulosViewModel()
+            :base()
         {
             BotonesCommand = new CommandBotones<string>(ControlBotones);
             ObservableCollection<DatosBotones> datos = new ObservableCollection<DatosBotones>

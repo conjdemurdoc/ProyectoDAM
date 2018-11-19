@@ -122,7 +122,7 @@ namespace Veterinaria.CodigoDelegado
             {
                 return -1;
             }
-            //TEMPORAL
+            //PENDIENTE generar comprobacion
             return 0;
         }
         public GestionProveedoresViewModel()

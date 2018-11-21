@@ -54,6 +54,7 @@ namespace Veterinaria.CodigoDelegado
             var insertado = (from c in ListaCitas
                              where c.IsNew
                              select c).ToList();
+            //PENDIENTE modificar base de datos, añadir "ATENDIDA int default 0"
             if (db.ChangeTracker.HasChanges() || insertado.Count > 0)
             {
                 foreach (CitaPreviaVM c in insertado)

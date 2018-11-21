@@ -73,6 +73,7 @@ namespace Veterinaria.CodigoDelegado
                 {
                     db.SaveChanges();
                     msg = "Todos los datos guardados";
+                    GetData();
                 }
                 catch (Exception e)
                 {

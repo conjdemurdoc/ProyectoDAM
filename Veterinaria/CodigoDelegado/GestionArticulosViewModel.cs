@@ -119,12 +119,15 @@ namespace Veterinaria.CodigoDelegado
         private int ComprobarExistencia()
         {
             var prod = db.TBLPRODUCTOS.Find(ArticuloSeleccionado.ElProducto.ID);
-            if (prod == null || ArticuloSeleccionado .IsNew)
+            if (prod == null || ArticuloSeleccionado.IsNew)
             {
                 return -1;
             }
-            //PENDIENTE generar comprobacion
-            return 0;
+            int linesCount = db.Entry(prod)
+                               .Collection(p => p.TBLTICKETS)
+                               .Query()
+                               .Count();
+            return linesCount;
         }
         public GestionArticulosViewModel()
             :base()

@@ -125,7 +125,11 @@ namespace Veterinaria.CodigoDelegado
                 return -1;
             }
             //PENDIENTE generar comprobacion
-            return 0;
+            int linesCount = db.Entry(prod)
+                               .Collection(p => p.TBLTICKETS)
+                               .Query()
+                               .Count();
+            return linesCount;
         }
         public GestionServiciosViewModel()
             :base()

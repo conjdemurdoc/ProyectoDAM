@@ -58,13 +58,13 @@ namespace Veterinaria.CodigoDelegado
             {
                 foreach (ClienteVM c in insertado)
                 {
+                    c.IsNew = false; //PENDIENTE establecer a mano en los demas codigos el isnew como false en lugar de recargar la lista, es más ligero para la memoria, inutil, "Matando moscas a cañonazos"
                     db.TBLCLIENTES.Add(c.ElCliente);
                 }
                 try
                 {
                     db.SaveChanges();
                     msg = "Todos los datos guardados";
-                    GetData();
                 }
                 catch (Exception e)
                 {
@@ -97,7 +97,7 @@ namespace Veterinaria.CodigoDelegado
                 }
                 else if (Existe > 0)
                 {
-                    msg = string.Format("no se puede borrar, tiene {0} mascotas aun registradas", Existe);
+                    msg = string.Format("no se puede borrar, tiene {0} registros que aún tienen dependencias (Mascota o ticket)", Existe);
                 }
                 else
                 {
@@ -125,6 +125,13 @@ namespace Veterinaria.CodigoDelegado
                                .Collection(p => p.TBLMASCOTAS)
                                .Query()
                                .Count();
+            if (linesCount < 1)
+            {
+                linesCount = db.Entry(prod)
+                               .Collection(p => p.TBLTICKETS)
+                               .Query()
+                               .Count();
+            }//PENDIENTE agregar un delete cascade a las citas previas
             return linesCount;
         }
         public GestionClientesViewModel()

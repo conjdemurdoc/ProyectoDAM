@@ -118,12 +118,11 @@ namespace Veterinaria.CodigoDelegado
         }
         private int ComprobarExistencia()
         {
-            var prod = db.TBLPRODUCTOS.Find(ProveeodrSeleccionado.ElProveedor.ID);
+            var prod = db.TBLPROVEEDORES.Find(ProveeodrSeleccionado.ElProveedor.ID);
             if (prod == null || ProveeodrSeleccionado.IsNew)
             {
                 return -1;
             }
-            //PENDIENTE generar comprobacion
             return 0;
         }
         public GestionProveedoresViewModel()

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Veterinaria"
         mc:Ignorable="d" Style="{DynamicResource WindowFont}"
-        Title="Menú principal" Height="620" Width="1200" ResizeMode="CanMinimize" Background="{DynamicResource PseudoVerdeBrush}">
+        Title="Menú principal" Height="600" Width="1200" ResizeMode="CanMinimize" Background="{DynamicResource PseudoVerdeBrush}">
     <Window.Resources>
         <!-- tamaño maximo del contenido del user control, teniendo en cuenta la anchura = 1000, es 750, y la altura es 500 (la misma que el formulario original, éste)-->
     </Window.Resources>

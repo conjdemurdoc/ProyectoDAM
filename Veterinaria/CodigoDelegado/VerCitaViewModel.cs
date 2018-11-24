@@ -26,7 +26,7 @@ namespace Veterinaria.CodigoDelegado
                 CargarClientes();
                 ObservableCollection<CitaPreviaVM> Listacitas = new ObservableCollection<CitaPreviaVM>();
                 var citas = await (from p in db.TBLCITAPREVIA
-                                   //where p.ATENDIDA = 0
+                                   where p.ATENDIDA == 0
                                    orderby p.ID
                                    select p).ToListAsync();
                 foreach (TBLCITAPREVIA cita in citas)
@@ -54,11 +54,11 @@ namespace Veterinaria.CodigoDelegado
             var insertado = (from c in ListaCitas
                              where c.IsNew
                              select c).ToList();
-            //PENDIENTE modificar base de datos, añadir "ATENDIDA int default 0"
             if (db.ChangeTracker.HasChanges() || insertado.Count > 0)
             {
                 foreach (CitaPreviaVM c in insertado)
                 {
+                    c.IsNew = false;
                     db.TBLCITAPREVIA.Add(c.LaCita);
                 }
                 try

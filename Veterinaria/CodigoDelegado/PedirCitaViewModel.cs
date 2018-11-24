@@ -59,13 +59,14 @@ namespace Veterinaria.CodigoDelegado
                 foreach (CitaPreviaVM c in insertado)
                 {
                     c.LaCita.FECHAREALIZADA = DateTime.Now;
+                    c.IsNew = false;
+                    c.LaCita.ATENDIDA = 0;
                     db.TBLCITAPREVIA.Add(c.LaCita);
                 }
                 try
                 {
                     db.SaveChanges();
                     msg = "Todos los datos guardados";
-                    GetData();
                 }
                 catch (Exception e)
                 {

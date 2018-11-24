@@ -59,13 +59,13 @@ namespace Veterinaria.CodigoDelegado
             {
                 foreach (ProveedorVM c in insertado)
                 {
+                    c.IsNew = false;
                     db.TBLPROVEEDORES.Add(c.ElProveedor);
                 }
                 try
                 {
                     db.SaveChanges();
                     msg = "Todos los datos guardados";
-                    GetData();
                 }
                 catch (Exception e)
                 {

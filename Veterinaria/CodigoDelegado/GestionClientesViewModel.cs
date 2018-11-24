@@ -58,7 +58,7 @@ namespace Veterinaria.CodigoDelegado
             {
                 foreach (ClienteVM c in insertado)
                 {
-                    c.IsNew = false; //PENDIENTE establecer a mano en los demas codigos el isnew como false en lugar de recargar la lista, es más ligero para la memoria, inutil, "Matando moscas a cañonazos"
+                    c.IsNew = false; //PENDIENTE (Hecho) "Matando moscas a cañonazos", hay que establecer a mano el isnew como false en lugar de recargar la lista, es más ligero para la memoria, inutil
                     db.TBLCLIENTES.Add(c.ElCliente);
                 }
                 try
@@ -131,7 +131,15 @@ namespace Veterinaria.CodigoDelegado
                                .Collection(p => p.TBLTICKETS)
                                .Query()
                                .Count();
-            }//PENDIENTE agregar un delete cascade a las citas previas
+            }
+            if (linesCount < 1)
+            {
+                linesCount = db.Entry(prod)
+                               .Collection(p => p.TBLCITAPREVIA)
+                               .Query()
+                               .Where(x=>x.ATENDIDA == 0)
+                               .Count();
+            }
             return linesCount;
         }
         public GestionClientesViewModel()

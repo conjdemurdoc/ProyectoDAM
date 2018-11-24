@@ -13,6 +13,7 @@
           <Property Name="FECHAREALIZADA" Type="date" />
           <Property Name="FECHAFIJADA" Type="date" />
           <Property Name="CLIENTE" Type="varchar" MaxLength="9" />
+          <Property Name="ATENDIDA" Type="int" />
         </EntityType>
         <EntityType Name="TBLCLIENTES">
           <Key>
@@ -189,6 +190,7 @@
           <Property Name="FECHAFIJADA" Type="DateTime" Precision="0" />
           <Property Name="CLIENTE" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TBLCLIENTES" Relationship="VeterinariaModel.FK__TBLCITAPR__CLIEN__49C3F6B7" FromRole="TBLCITAPREVIA" ToRole="TBLCLIENTES" />
+          <Property Name="ATENDIDA" Type="Int32" />
         </EntityType>
         <EntityType Name="TBLCLIENTES">
           <Key>
@@ -318,6 +320,7 @@
           <EntitySetMapping Name="TBLCITAPREVIA">
             <EntityTypeMapping TypeName="VeterinariaModel.TBLCITAPREVIA">
               <MappingFragment StoreEntitySet="TBLCITAPREVIA">
+                <ScalarProperty Name="ATENDIDA" ColumnName="ATENDIDA" />
                 <ScalarProperty Name="CLIENTE" ColumnName="CLIENTE" />
                 <ScalarProperty Name="FECHAFIJADA" ColumnName="FECHAFIJADA" />
                 <ScalarProperty Name="FECHAREALIZADA" ColumnName="FECHAREALIZADA" />

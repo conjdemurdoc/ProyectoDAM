@@ -67,13 +67,13 @@ namespace Veterinaria.CodigoDelegado
                 {
                     //var a = db.TBLCLIENTES.Where(x => x.NOMBRE == c.PropietarioSeleccionado.ElCliente.NOMBRE);
                     //c.LaMascota.PROPIETARIO = c.PropietarioSeleccionado.ElCliente.DNI;
+                    c.IsNew = false;
                     db.TBLMASCOTAS.Add(c.LaMascota);
                 }
                 try
                 {
                     db.SaveChanges();
                     msg = "Todos los datos guardados";
-                    GetData();
                 }
                 catch (Exception e)
                 {

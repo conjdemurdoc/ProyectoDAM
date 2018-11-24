@@ -60,13 +60,13 @@ namespace Veterinaria.CodigoDelegado
                 foreach (ProductoVM c in insertado)
                 {
                     c.ElProducto.TIPO = 1;
+                    c.IsNew = false;
                     db.TBLPRODUCTOS.Add(c.ElProducto);
                 }
                 try
                 {
                     db.SaveChanges();
                     msg = "Todos los datos guardados";
-                    GetData();
                 }
                 catch (Exception e)
                 {
@@ -124,7 +124,6 @@ namespace Veterinaria.CodigoDelegado
             {
                 return -1;
             }
-            //PENDIENTE generar comprobacion
             int linesCount = db.Entry(prod)
                                .Collection(p => p.TBLTICKETS)
                                .Query()

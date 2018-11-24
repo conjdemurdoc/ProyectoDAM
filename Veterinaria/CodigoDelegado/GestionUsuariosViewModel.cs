@@ -56,13 +56,13 @@ namespace Veterinaria.CodigoDelegado
             {
                 foreach (UsuarioVM c in insertado)
                 {
+                    c.IsNew = false;
                     db.TBLUSUARIOS.Add(c.Usuario);
                 }
                 try
                 {
                     db.SaveChanges();
                     msg = "Todos los datos guardados";
-                    GetData();
                 }
                 catch (Exception e)
                 {

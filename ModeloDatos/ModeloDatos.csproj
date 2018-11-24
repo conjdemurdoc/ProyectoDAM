@@ -50,8 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClasesVM\CitaPreviaVM.cs" />
     <Compile Include="ClasesVM\ClienteVM.cs" />
     <Compile Include="ClasesVM\MascotaVM.cs" />
+    <Compile Include="ClasesVM\ProductoVM.cs" />
+    <Compile Include="ClasesVM\ProveedorVM.cs" />
+    <Compile Include="ClasesVM\TicketVM.cs" />
     <Compile Include="ClasesVM\UsuarioVM.cs" />
     <Compile Include="CrudVMBase.cs" />
     <Compile Include="Model1.Context.cs">

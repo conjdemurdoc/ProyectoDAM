@@ -67,11 +67,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CodigoDelegado\CobrarViewModel.cs" />
+    <Compile Include="CodigoDelegado\VerCitaViewModel.cs" />
+    <Compile Include="Vistas\Cobrar.xaml.cs">
+      <DependentUpon>Cobrar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\PedirCita.xaml.cs">
+      <DependentUpon>PedirCita.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\VerCita.xaml.cs">
+      <DependentUpon>VerCita.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Vistas\Cobrar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\GestionArticulos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vistas\GestionClientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\GestionMascotas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\GestionProveedores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\GestionServicios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,14 +120,27 @@
     </Compile>
     <Compile Include="CodigoDelegado\GestionClientesViewModel.cs" />
     <Compile Include="CodigoDelegado\GestionMascotasViewModel.cs" />
+    <Compile Include="CodigoDelegado\GestionProveedoresViewModel.cs" />
+    <Compile Include="CodigoDelegado\GestionServiciosViewModel.cs" />
     <Compile Include="CodigoDelegado\GestionUsuariosViewModel.cs" />
+    <Compile Include="CodigoDelegado\GestionArticulosViewModel.cs" />
     <Compile Include="CodigoDelegado\LoginViewModel.cs" />
     <Compile Include="CodigoDelegado\MainWindowViewModel.cs" />
+    <Compile Include="CodigoDelegado\PedirCitaViewModel.cs" />
+    <Compile Include="Vistas\GestionArticulos.xaml.cs">
+      <DependentUpon>GestionArticulos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\GestionClientes.xaml.cs">
       <DependentUpon>GestionClientes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\GestionMascotas.xaml.cs">
       <DependentUpon>GestionMascotas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\GestionProveedores.xaml.cs">
+      <DependentUpon>GestionProveedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\GestionServicios.xaml.cs">
+      <DependentUpon>GestionServicios.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\GestionUsuarios.xaml.cs">
       <DependentUpon>GestionUsuarios.xaml</DependentUpon>
@@ -112,6 +152,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Vistas\PedirCita.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\VerCita.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -131,6 +179,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\AveriaSansLibre-Bold.ttf" />
+    <Resource Include="Fonts\AveriaSansLibre-BoldItalic.ttf" />
+    <Resource Include="Fonts\AveriaSansLibre-Italic.ttf" />
+    <Resource Include="Fonts\AveriaSansLibre-Light.ttf" />
+    <Resource Include="Fonts\AveriaSansLibre-LightItalic.ttf" />
+    <Resource Include="Fonts\AveriaSansLibre-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -140,7 +194,35 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModeloDatos\ModeloDatos.csproj">
       <Project>{e9626b7d-0b25-4ab7-90fc-fdc2468e9fb0}</Project>
@@ -150,6 +232,9 @@
       <Project>{d519c6f7-52a9-49b9-a48c-d3df5bd72da8}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

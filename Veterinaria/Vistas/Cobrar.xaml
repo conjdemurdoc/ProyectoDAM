@@ -35,7 +35,7 @@
             <TextBlock Text="DNI:" Margin="5"></TextBlock>
             <TextBlock Text="{Binding DniCliente}" Foreground="{DynamicResource AzulGrisBrush}" Margin="5"/>
             <TextBlock Text="Total a cobrar:" Margin="5"></TextBlock>
-            <TextBlock Text="{Binding TotalTicket}" Foreground="{DynamicResource AzulGrisBrush}" Margin="5"/>
+            <TextBlock Text="{Binding TotalTicket, StringFormat='#,0.00'}" Foreground="{DynamicResource AzulGrisBrush}" Margin="5"/>
         </StackPanel>
         <Grid Grid.Column="1"
               Grid.Row="2">
@@ -88,7 +88,7 @@
                   CanUserResizeRows="False"
                   ColumnWidth="SizeToCells"  >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ElTicket.FECHA}" IsReadOnly="true" Header="Fecha Ticket" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding ElTicket.FECHA, StringFormat='dd/MM/yyyy'}" IsReadOnly="true" Header="Fecha Ticket" Width="*"/>
                     <DataGridTextColumn Binding="{Binding ElTicket.CLIENTE}" IsReadOnly="true" Header="Cliente" Width="*"/>
                     <DataGridTextColumn Binding="{Binding ElTicket.PRODUCTO}" IsReadOnly="true" Header="Producto" Width="*"/>
                 </DataGrid.Columns>
@@ -148,7 +148,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ElProducto.ID}" Header="ID" Width="*"/>
                     <DataGridTextColumn Binding="{Binding ElProducto.NOMBRE}" Header="Nombre" Width="2*"/>
-                    <DataGridTextColumn Binding="{Binding ElProducto.COSTE}" Header="Precio" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding ElProducto.COSTE, StringFormat='#,#.00'}" Header="Precio" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

@@ -62,7 +62,7 @@
                   ColumnWidth="SizeToCells" PreviewKeyDown="DataGrid_KeyDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ElProducto.NOMBRE, Mode=TwoWay}" Header="NOMBRE" Width="*"/>
-                <DataGridTextColumn Binding="{Binding ElProducto.COSTE, Mode=TwoWay, StringFormat='#,#.0'}" Header="COSTE" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ElProducto.COSTE, Mode=TwoWay, StringFormat='#,#.00'}" Header="COSTE" Width="*"/>
                 <DataGridCheckBoxColumn Binding="{Binding ElProducto.DISPONIBLE, Mode=TwoWay}" Header="DISPONIBLE" Width="*"/>
                 <!--<DataGridComboBoxColumn ItemsSource="{Binding Cosas}" SelectedValueBinding="{Binding Seleccionado}" Header="LISTADECOSAS" Width="SizeToHeader"/> a probar en casa en las relaciones entre tablas-->
             </DataGrid.Columns>

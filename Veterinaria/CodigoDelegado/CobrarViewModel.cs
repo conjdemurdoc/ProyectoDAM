@@ -239,35 +239,62 @@ namespace Veterinaria.CodigoDelegado
 
         private void GenerarFactura()
         {
-            NsExcel.Application objExcel = new NsExcel.Application(); ;
-            var objWorkbook = objExcel.Workbooks.Add(NsExcel.XlWBATemplate.xlWBATWorksheet);
-            var objWorksheet = objWorkbook.Worksheets[1];
-
-            objWorksheet.Cells[1, 1] = "PRODUCTO/SERVICIO";
-            objWorksheet.Cells[1, 2] = "COSTE";
-
-            for (int i = 1; i <= ListaTickets.Count; i++)
+            string usuarioactual;
+            NsExcel.Application objExcel = null;
+            NsExcel.Workbook objWorkbook = null;
+            try
             {
-                var producto = db.TBLPRODUCTOS.Find(ListaTickets[i - 1].ElTicket.PRODUCTO);
-                objWorksheet.Cells[i + 1, 1] = producto.NOMBRE;
-                objWorksheet.Cells[i + 1, 2] = string.Format("{0:#.##}", producto.COSTE.ToString());
-            }
-            var usuarioactual = Environment.UserName;
-            objWorkbook.SaveAs("C:\\Users\\"+ usuarioactual +"\\Documents\\" + DateTime.Now.Date.ToString("yyyy-MM-dd") + "_" + ClienteSeleccionado.ElCliente.NOMBRE + ".xlsx");
-            objWorkbook.Close();
-            objExcel.Quit();
+                usuarioactual = Environment.UserName;
+                objExcel = new NsExcel.Application(); ;
+                objWorkbook = objExcel.Workbooks.Open("C:\\Users\\" + usuarioactual + "\\Documents\\plantilla.xlsx",
+            0, false, 5, "", "", false, NsExcel.XlPlatform.xlWindows, "",
+            true, false, 0, true, false, false);
+                var objWorksheet = objWorkbook.Worksheets[1];
+                
+                var hora1 = string.Format("{0:HH:mm}", DateTime.Now);
+                var hora2 = string.Format("{0:HH-mm}", DateTime.Now);
+                objWorksheet.Cells[11, 3] = NombreCompleto;
+                objWorksheet.Cells[11, 6] = DniCliente;
+                objWorksheet.Cells[12, 3] = ClienteSeleccionado.ElCliente.CORREO;
+                objWorksheet.Cells[12, 6] = ClienteSeleccionado.ElCliente.TELEFONO;
+                objWorksheet.Cells[13, 3] = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                objWorksheet.Cells[13, 6] = hora1;
 
-            //using (StreamWriter sw = File.CreateText("list.csv"))
-            //{
-            //    sw.Write("Cliente:");
-            //    sw.WriteLine(NombreCompleto);
-            //    for (int i = 0; i < ListaTickets.Count; i++)
-            //    {
-            //        var producto = db.TBLPRODUCTOS.Find(ListaTickets[i].ElTicket.PRODUCTO);
-            //        sw.Write(producto.NOMBRE);
-            //        sw.WriteLine(producto.COSTE);
-            //    }
-            //}
+                for (int i = 0; i < ListaTickets.Count; i++)
+                {
+                    var producto = db.TBLPRODUCTOS.Find(ListaTickets[i].ElTicket.PRODUCTO);
+                    objWorksheet.Cells[i + 17, 2] = producto.ID;
+                    objWorksheet.Cells[i + 17, 3] = producto.NOMBRE;
+                    objWorksheet.Cells[i + 17, 6] = 0.21;
+                    objWorksheet.Cells[i + 17, 7] = producto.COSTE;
+                }
+                objWorksheet.Cells[44, 6] = TotalTicket;
+                objWorkbook.SaveAs("C:\\Users\\" + usuarioactual + "\\Documents\\" + DateTime.Now.Date.ToString("yyyy-MM-dd") + "_" + hora2 + "_" + ClienteSeleccionado.ElCliente.NOMBRE + ".xlsx");
+            }
+            catch(Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (GenerarFactura)", Logs.constantes.EXCEPTION_TYPE);
+                }
+                else
+                {
+                    Logs.Logs.EscribirLog(e.Message, ToString() + " (GenerarFactura)", Logs.constantes.EXCEPTION_TYPE);
+                }
+            }
+            finally
+            {
+                
+                if (objExcel != null)
+                {
+                    if(objWorkbook != null)
+                    {
+                        objWorkbook.Close();
+                    }
+                    objExcel.Quit();
+                }
+            }
+            
         }
 
         private void CargarClientes()

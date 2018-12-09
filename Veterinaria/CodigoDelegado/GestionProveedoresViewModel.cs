@@ -26,7 +26,7 @@ namespace Veterinaria.CodigoDelegado
             {
                 ObservableCollection<ProveedorVM> listaproveedores = new ObservableCollection<ProveedorVM>();
                 var proveedores = await (from p in db.TBLPROVEEDORES
-                                       orderby p.ID
+                                       orderby p.NIF
                                        select p).ToListAsync();
                 foreach (TBLPROVEEDORES proveedor in proveedores)
                 {
@@ -112,13 +112,13 @@ namespace Veterinaria.CodigoDelegado
             }
             else
             {
-                msg = "Ningun cliente seleccionado";
+                msg = "Ningun proveedor seleccionado";
             }
             MessageBox.Show(msg);
         }
         private int ComprobarExistencia()
         {
-            var prod = db.TBLPROVEEDORES.Find(ProveeodrSeleccionado.ElProveedor.ID);
+            var prod = db.TBLPROVEEDORES.Find(ProveeodrSeleccionado.ElProveedor.NIF);
             if (prod == null || ProveeodrSeleccionado.IsNew)
             {
                 return -1;

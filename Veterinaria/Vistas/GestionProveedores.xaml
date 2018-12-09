@@ -61,10 +61,10 @@
                   CanUserResizeRows="False"
                   ColumnWidth="SizeToCells" PreviewKeyDown="DataGrid_KeyDown">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ElProveedor.ID, Mode=TwoWay}" Header="NIF" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ElProveedor.NIF, Mode=TwoWay}" Header="NIF" Width="*"/>
                 <DataGridTextColumn Binding="{Binding ElProveedor.EMPRESA, Mode=TwoWay}" Header="EMPRESA" Width="*"/>
                 <DataGridTextColumn Binding="{Binding ElProveedor.CORREO, Mode=TwoWay}" Header="CORREO" Width="*"/>
-                <DataGridCheckBoxColumn Binding="{Binding ElProveedor.TELEFONO, Mode=TwoWay}" Header="TELEFONO" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ElProveedor.TELEFONO, Mode=TwoWay}" Header="TELEFONO" Width="*"/>
                 <!--<DataGridComboBoxColumn ItemsSource="{Binding Cosas}" SelectedValueBinding="{Binding Seleccionado}" Header="LISTADECOSAS" Width="SizeToHeader"/> a probar en casa en las relaciones entre tablas-->
             </DataGrid.Columns>
         </DataGrid>

@@ -17,12 +17,14 @@ namespace Veterinaria.CodigoDelegado
     {
         public ProductoVM ArticuloSeleccionado { get; set; }
         public ObservableCollection<ProductoVM> ListaArticulos { get; set; }
+        public ObservableCollection<ProveedorVM> ListaProveedores { get; set; }
         public ObservableCollection<DatosBotones> Datos { get; set; }
         public CommandBotones<string> BotonesCommand { get; private set; }
         protected async override void GetData()
         {
             try
             {
+                CargarProveedores();
                 ObservableCollection<ProductoVM> listaproductos = new ObservableCollection<ProductoVM>();
                 var productos = await (from p in db.TBLPRODUCTOS
                                        where p.TIPO == 0
@@ -128,6 +130,36 @@ namespace Veterinaria.CodigoDelegado
                                .Query()
                                .Count();
             return linesCount;
+        }
+        private void CargarProveedores()
+        {
+            try
+            {
+                ObservableCollection<ProveedorVM> Listaproveedores = new ObservableCollection<ProveedorVM>();
+                var listaproveeodres = (from p in db.TBLPROVEEDORES
+                                         orderby p.NIF
+                                         select p).ToList();
+                foreach (TBLPROVEEDORES a in listaproveeodres)
+                {
+                    Listaproveedores.Add(new ProveedorVM
+                    {
+                        ElProveedor = a,
+                        IsNew = false
+                    });
+                }
+                ListaProveedores = Listaproveedores;
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (CargarProveedores)", Logs.constantes.EXCEPTION_TYPE);
+                }
+                else
+                {
+                    Logs.Logs.EscribirLog(e.Message, ToString() + " (CargarProveedores)", Logs.constantes.EXCEPTION_TYPE);
+                }
+            }
         }
         public GestionArticulosViewModel()
             :base()

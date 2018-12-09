@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Veterinaria.Vistas"
+             xmlns:vm="clr-namespace:Veterinaria.CodigoDelegado"
              mc:Ignorable="d" Style="{DynamicResource UserFont}"
         Height="400" Width="450" Background="{DynamicResource PseudoVerdeBrush }">
+    <UserControl.Resources>
+        <vm:GestionArticulosViewModel x:Key="VmArticulos"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -63,6 +67,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ElProducto.NOMBRE, Mode=TwoWay}" Header="NOMBRE" Width="*"/>
                 <DataGridTextColumn Binding="{Binding ElProducto.COSTE, Mode=TwoWay, StringFormat='#,#.00'}" Header="COSTE" Width="*"/>
+                <DataGridComboBoxColumn ItemsSource="{Binding ListaProveedores, Source={StaticResource VmArticulos}}"
+                                        DisplayMemberPath="ElProveedor.EMPRESA"
+                                        SelectedValuePath="ElProveedor.NIF"
+                                        SelectedValueBinding="{Binding ElProducto.PROVEEDOR}"
+                                        Header="PROVEEDOR" Width="1.5*"/>
                 <DataGridCheckBoxColumn Binding="{Binding ElProducto.DISPONIBLE, Mode=TwoWay}" Header="DISPONIBLE" Width="*"/>
                 <!--<DataGridComboBoxColumn ItemsSource="{Binding Cosas}" SelectedValueBinding="{Binding Seleccionado}" Header="LISTADECOSAS" Width="SizeToHeader"/> a probar en casa en las relaciones entre tablas-->
             </DataGrid.Columns>

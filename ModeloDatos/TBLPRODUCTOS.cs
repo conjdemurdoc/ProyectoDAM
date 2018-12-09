@@ -25,7 +25,9 @@ namespace ModeloDatos
         public string NOMBRE { get; set; }
         public Nullable<float> COSTE { get; set; }
         public int DISPONIBLE { get; set; }
+        public string PROVEEDOR { get; set; }
     
+        public virtual TBLPROVEEDORES TBLPROVEEDORES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBLTICKETS> TBLTICKETS { get; set; }
     }

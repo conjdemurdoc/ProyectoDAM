@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Veterinaria.Vistas"
+             xmlns:vm="clr-namespace:Veterinaria.CodigoDelegado"
              mc:Ignorable="d" Style="{DynamicResource UserFont}"
         Height="400" Width="800" Background="{DynamicResource PseudoVerdeBrush }">
+    <UserControl.Resources>
+        <vm:CobrarViewModel x:Key="VmCobrar"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -90,7 +94,12 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ElTicket.FECHA, StringFormat='dd/MM/yyyy'}" IsReadOnly="true" Header="Fecha Ticket" Width="*"/>
                     <DataGridTextColumn Binding="{Binding ElTicket.CLIENTE}" IsReadOnly="true" Header="Cliente" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding ElTicket.PRODUCTO}" IsReadOnly="true" Header="Producto" Width="*"/>
+                    <DataGridComboBoxColumn ItemsSource="{Binding ListaProductos, Source={StaticResource VmCobrar}}"
+                                        DisplayMemberPath="ElProducto.NOMBRE"
+                                        SelectedValuePath="ElProducto.ID"
+                                        SelectedValueBinding="{Binding ElTicket.PRODUCTO}"
+                                        IsReadOnly="true"
+                                        Header="Producto" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

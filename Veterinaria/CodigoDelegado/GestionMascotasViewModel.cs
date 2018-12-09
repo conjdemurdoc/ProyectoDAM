@@ -123,7 +123,7 @@ namespace Veterinaria.CodigoDelegado
         }
         private int ComprobarExistencia()
         {
-            var prod = db.TBLCLIENTES.Find(MascotaSeleccionada.LaMascota.IDMASCOTA);
+            var prod = db.TBLMASCOTAS.Find(MascotaSeleccionada.LaMascota.IDMASCOTA);
             if (prod == null || MascotaSeleccionada.IsNew) //solo lo borra de la base de datos si no es null ni nuevo (IsNew)
             {
                 return -1;

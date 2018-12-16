@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using Utils;
 
 namespace Veterinaria.CodigoDelegado
@@ -17,9 +18,9 @@ namespace Veterinaria.CodigoDelegado
             SalirCommand = new CommandCerrar(Salir);
             BotonesCommand = new CommandBotones<string>(ControlBotones);
         }
-        public string ImagePath
+        public BitmapImage ImagePath
         {
-            get { return @"C:\Rumbo\Recursos\Logo1.jpg"; }
+            get { return new BitmapImage(new Uri("LogoPipo.png",UriKind.Relative)); }
         }
         private string usuario;
         public string Usuario

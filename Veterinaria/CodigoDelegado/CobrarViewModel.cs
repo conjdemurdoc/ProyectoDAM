@@ -246,7 +246,7 @@ namespace Veterinaria.CodigoDelegado
             {
                 usuarioactual = Environment.UserName;
                 objExcel = new NsExcel.Application(); ;
-                objWorkbook = objExcel.Workbooks.Open("C:\\Users\\" + usuarioactual + "\\Documents\\plantilla.xlsx",
+                objWorkbook = objExcel.Workbooks.Open("C:\\Users\\" + usuarioactual + "\\Documents\\Recursos\\plantilla.xlsx",
             0, false, 5, "", "", false, NsExcel.XlPlatform.xlWindows, "",
             true, false, 0, true, false, false);
                 var objWorksheet = objWorkbook.Worksheets[1];
@@ -269,7 +269,7 @@ namespace Veterinaria.CodigoDelegado
                     objWorksheet.Cells[i + 17, 7] = producto.COSTE;
                 }
                 objWorksheet.Cells[44, 6] = TotalTicket;
-                objWorkbook.SaveAs("C:\\Users\\" + usuarioactual + "\\Documents\\" + DateTime.Now.Date.ToString("yyyy-MM-dd") + "_" + hora2 + "_" + ClienteSeleccionado.ElCliente.NOMBRE + ".xlsx");
+                objWorkbook.SaveAs("C:\\Users\\" + usuarioactual + "\\Documents\\Facturas\\" + DateTime.Now.Date.ToString("yyyy-MM-dd") + "_" + hora2 + "_" + ClienteSeleccionado.ElCliente.NOMBRE + ".xlsx");
             }
             catch(Exception e)
             {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Veterinaria"
         mc:Ignorable="d" Style="{DynamicResource WindowFont}"
-        Title="Helpet" Height="600" Width="1200" ResizeMode="CanMinimize" Background="{DynamicResource PseudoVerdeBrush}">
+        Title="Contigo pipo" Height="600" Width="1200" ResizeMode="CanMinimize" Background="{DynamicResource PseudoVerdeBrush}">
     <Window.Resources>
         <!-- tamaño maximo del contenido del user control, teniendo en cuenta la anchura = 1000, es 750, y la altura es 500 (la misma que el formulario original, éste)-->
     </Window.Resources>
@@ -100,8 +100,11 @@
             </Expander>
         </Grid>
         <GridSplitter IsEnabled="False" Grid.Column="2" Grid.RowSpan="3" Width="5" HorizontalAlignment="Center" Background="#514748" />
-        <Grid Grid.Column="3" Grid.Row="1">
+        <Grid Grid.Column="3" Grid.Row="1" Visibility="{Binding Visible1}">
             <ContentControl Name="ContentControl1" Content="{Binding VistaContenida,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="3" Grid.Row="1" Visibility="{Binding Visible2}">
+            <Image Source="{Binding imagen}" Stretch="Uniform" Width="400"/>
         </Grid>
         <!-- <Button Grid.Column="0" Margin="0,50" IsEnabled="{Binding Path=NivelAcceso}"/>-->
     </Grid>

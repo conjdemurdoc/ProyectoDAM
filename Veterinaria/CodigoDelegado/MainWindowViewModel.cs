@@ -23,22 +23,36 @@ namespace Veterinaria.CodigoDelegado
         {
             get; set;
         }
+        public Visibility Visible1 { get; set; }
+        public Visibility Visible2 { get; set; }
+        public string imagen
+        {
+            get { return @"C:\Users\"+ Environment.UserName + @"\Documents\Recursos\logoPipo.png"; }
+        }
         public MainWindowViewModel()
         {
             NivelAcceso = LoginViewModel.NivelAcceso;
             NavCommand = new CommandBotones<string>(_ControlBotones);
-            Path p = new Path
-            {
-                Data = Application.Current.Resources["PawIcon"] as Geometry,
-                Fill = Application.Current.Resources["CasiNegroBrush"] as SolidColorBrush,
-                Stretch = Stretch.Uniform,
-                Width = 300
-            };
-            VistaContenida = p;
+            //Path p = new Path
+            //{
+            //    Data = Application.Current.Resources["PawIcon"] as Geometry,
+            //    Fill = Application.Current.Resources["CasiNegroBrush"] as SolidColorBrush,
+            //    Stretch = Stretch.Uniform,
+            //    Width = 300
+            //};
+            Visible1 = Visibility.Hidden;
+            Visible2 = Visibility.Visible;
+            RaisePropertyChanged("Visible1");
+            RaisePropertyChanged("Visible2");
+            //VistaContenida = p;
         }
 
         private void _ControlBotones(string obj)
         {
+            Visible1 = Visibility.Visible;
+            Visible2 = Visibility.Hidden;
+            RaisePropertyChanged("Visible1");
+            RaisePropertyChanged("Visible2");
             switch (obj)
             {
                 case "btnUsuarios":

@@ -13,26 +13,26 @@
           <Property Name="FECHAREALIZADA" Type="date" />
           <Property Name="FECHAFIJADA" Type="date" />
           <Property Name="CLIENTE" Type="varchar" MaxLength="9" />
-          <Property Name="ATENDIDA" Type="int" />
+          <Property Name="ATENDIDA" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TBLCLIENTES">
           <Key>
             <PropertyRef Name="DNI" />
           </Key>
           <Property Name="DNI" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
-          <Property Name="APELLIDOS" Type="varchar" MaxLength="100" />
-          <Property Name="CODIGOPOSTAL" Type="numeric" Precision="5" Scale="0" />
-          <Property Name="CORREO" Type="varchar" MaxLength="50" />
-          <Property Name="FECHANACIMIENTO" Type="date" />
-          <Property Name="TELEFONO" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDOS" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CODIGOPOSTAL" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FECHANACIMIENTO" Type="date" Nullable="false" />
+          <Property Name="TELEFONO" Type="numeric" Precision="9" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="TBLMASCOTAS">
           <Key>
             <PropertyRef Name="IDMASCOTA" />
           </Key>
           <Property Name="IDMASCOTA" Type="int" Nullable="false" />
-          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RAZA" Type="varchar" MaxLength="50" />
           <Property Name="FECHANACIMIENTO" Type="date" />
           <Property Name="PROPIETARIO" Type="varchar" MaxLength="9" />
@@ -42,9 +42,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TIPO" Type="int" />
-          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
-          <Property Name="COSTE" Type="real" />
+          <Property Name="TIPO" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="COSTE" Type="real" Nullable="false" />
           <Property Name="DISPONIBLE" Type="int" Nullable="false" />
           <Property Name="PROVEEDOR" Type="varchar" MaxLength="9" />
         </EntityType>
@@ -53,7 +53,7 @@
             <PropertyRef Name="NIF" />
           </Key>
           <Property Name="NIF" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="EMPRESA" Type="varchar" MaxLength="50" />
+          <Property Name="EMPRESA" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CORREO" Type="varchar" MaxLength="50" />
           <Property Name="TELEFONO" Type="numeric" Precision="9" Scale="0" />
         </EntityType>
@@ -76,7 +76,7 @@
           <Property Name="PASS" Type="varchar" MaxLength="20" />
           <Property Name="NIVEL" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__TBLCITAPR__CLIEN__4AB81AF0">
+        <Association Name="FK__TBLCITAPR__CLIEN__4E88ABD4">
           <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
           <End Role="TBLCITAPREVIA" Type="Self.TBLCITAPREVIA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -88,7 +88,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLMASCOT__PROPI__3C69FB99">
+        <Association Name="FK__TBLMASCOT__PROPI__403A8C7D">
           <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
           <End Role="TBLMASCOTAS" Type="Self.TBLMASCOTAS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -100,7 +100,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLPRODUC__PROVE__4316F928">
+        <Association Name="FK__TBLPRODUC__PROVE__46E78A0C">
           <End Role="TBLPROVEEDORES" Type="Self.TBLPROVEEDORES" Multiplicity="0..1" />
           <End Role="TBLPRODUCTOS" Type="Self.TBLPRODUCTOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,7 +112,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLTICKET__CLIEN__45F365D3">
+        <Association Name="FK__TBLTICKET__CLIEN__49C3F6B7">
           <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -126,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLTICKET__PRODU__47DBAE45">
+        <Association Name="FK__TBLTICKET__PRODU__4BAC3F29">
           <End Role="TBLPRODUCTOS" Type="Self.TBLPRODUCTOS" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -148,23 +148,23 @@
           <EntitySet Name="TBLPROVEEDORES" EntityType="Self.TBLPROVEEDORES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLTICKETS" EntityType="Self.TBLTICKETS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLUSUARIOS" EntityType="Self.TBLUSUARIOS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__TBLCITAPR__CLIEN__4AB81AF0" Association="Self.FK__TBLCITAPR__CLIEN__4AB81AF0">
+          <AssociationSet Name="FK__TBLCITAPR__CLIEN__4E88ABD4" Association="Self.FK__TBLCITAPR__CLIEN__4E88ABD4">
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLCITAPREVIA" EntitySet="TBLCITAPREVIA" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLMASCOT__PROPI__3C69FB99" Association="Self.FK__TBLMASCOT__PROPI__3C69FB99">
+          <AssociationSet Name="FK__TBLMASCOT__PROPI__403A8C7D" Association="Self.FK__TBLMASCOT__PROPI__403A8C7D">
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLMASCOTAS" EntitySet="TBLMASCOTAS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLPRODUC__PROVE__4316F928" Association="Self.FK__TBLPRODUC__PROVE__4316F928">
+          <AssociationSet Name="FK__TBLPRODUC__PROVE__46E78A0C" Association="Self.FK__TBLPRODUC__PROVE__46E78A0C">
             <End Role="TBLPROVEEDORES" EntitySet="TBLPROVEEDORES" />
             <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLTICKET__CLIEN__45F365D3" Association="Self.FK__TBLTICKET__CLIEN__45F365D3">
+          <AssociationSet Name="FK__TBLTICKET__CLIEN__49C3F6B7" Association="Self.FK__TBLTICKET__CLIEN__49C3F6B7">
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLTICKET__PRODU__47DBAE45" Association="Self.FK__TBLTICKET__PRODU__47DBAE45">
+          <AssociationSet Name="FK__TBLTICKET__PRODU__4BAC3F29" Association="Self.FK__TBLTICKET__PRODU__4BAC3F29">
             <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
             <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
           </AssociationSet>
@@ -210,7 +210,7 @@
           <Property Name="FECHAREALIZADA" Type="DateTime" Precision="0" />
           <Property Name="FECHAFIJADA" Type="DateTime" Precision="0" />
           <Property Name="CLIENTE" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="ATENDIDA" Type="Int32" />
+          <Property Name="ATENDIDA" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TBLCLIENTES" Relationship="VeterinariaModel.FK__TBLCITAPR__CLIEN__4AB81AF0" FromRole="TBLCITAPREVIA" ToRole="TBLCLIENTES" />
         </EntityType>
         <EntityType Name="TBLCLIENTES">
@@ -218,12 +218,12 @@
             <PropertyRef Name="DNI" />
           </Key>
           <Property Name="DNI" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APELLIDOS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CODIGOPOSTAL" Type="Decimal" Precision="5" Scale="0" />
-          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FECHANACIMIENTO" Type="DateTime" Precision="0" />
-          <Property Name="TELEFONO" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CODIGOPOSTAL" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHANACIMIENTO" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
           <NavigationProperty Name="TBLCITAPREVIA" Relationship="VeterinariaModel.FK__TBLCITAPR__CLIEN__4AB81AF0" FromRole="TBLCLIENTES" ToRole="TBLCITAPREVIA" />
           <NavigationProperty Name="TBLMASCOTAS" Relationship="VeterinariaModel.FK__TBLMASCOT__PROPI__3C69FB99" FromRole="TBLCLIENTES" ToRole="TBLMASCOTAS" />
           <NavigationProperty Name="TBLTICKETS" Relationship="VeterinariaModel.FK__TBLTICKET__CLIEN__45F365D3" FromRole="TBLCLIENTES" ToRole="TBLTICKETS" />
@@ -233,7 +233,7 @@
             <PropertyRef Name="IDMASCOTA" />
           </Key>
           <Property Name="IDMASCOTA" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RAZA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FECHANACIMIENTO" Type="DateTime" Precision="0" />
           <Property Name="PROPIETARIO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
@@ -244,9 +244,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TIPO" Type="Int32" />
-          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="COSTE" Type="Single" />
+          <Property Name="TIPO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COSTE" Type="Single" Nullable="false" />
           <Property Name="DISPONIBLE" Type="Int32" Nullable="false" />
           <Property Name="PROVEEDOR" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TBLPROVEEDORES" Relationship="VeterinariaModel.FK__TBLPRODUC__PROVE__4316F928" FromRole="TBLPRODUCTOS" ToRole="TBLPROVEEDORES" />
@@ -257,7 +257,7 @@
             <PropertyRef Name="NIF" />
           </Key>
           <Property Name="NIF" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TELEFONO" Type="Decimal" Precision="9" Scale="0" />
           <NavigationProperty Name="TBLPRODUCTOS" Relationship="VeterinariaModel.FK__TBLPRODUC__PROVE__4316F928" FromRole="TBLPROVEEDORES" ToRole="TBLPRODUCTOS" />

@@ -21,9 +21,9 @@ namespace ModeloDatos
         }
     
         public int ID { get; set; }
-        public Nullable<int> TIPO { get; set; }
+        public int TIPO { get; set; }
         public string NOMBRE { get; set; }
-        public Nullable<float> COSTE { get; set; }
+        public float COSTE { get; set; }
         public int DISPONIBLE { get; set; }
         public string PROVEEDOR { get; set; }
     

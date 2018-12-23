@@ -18,7 +18,7 @@ namespace ModeloDatos
         public Nullable<System.DateTime> FECHAREALIZADA { get; set; }
         public Nullable<System.DateTime> FECHAFIJADA { get; set; }
         public string CLIENTE { get; set; }
-        public Nullable<int> ATENDIDA { get; set; }
+        public int ATENDIDA { get; set; }
     
         public virtual TBLCLIENTES TBLCLIENTES { get; set; }
     }

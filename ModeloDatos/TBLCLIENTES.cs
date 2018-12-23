@@ -25,10 +25,10 @@ namespace ModeloDatos
         public string DNI { get; set; }
         public string NOMBRE { get; set; }
         public string APELLIDOS { get; set; }
-        public Nullable<decimal> CODIGOPOSTAL { get; set; }
+        public decimal CODIGOPOSTAL { get; set; }
         public string CORREO { get; set; }
-        public Nullable<System.DateTime> FECHANACIMIENTO { get; set; }
-        public Nullable<decimal> TELEFONO { get; set; }
+        public System.DateTime FECHANACIMIENTO { get; set; }
+        public decimal TELEFONO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBLCITAPREVIA> TBLCITAPREVIA { get; set; }

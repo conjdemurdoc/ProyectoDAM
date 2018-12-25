@@ -54,8 +54,8 @@
           </Key>
           <Property Name="NIF" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="EMPRESA" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CORREO" Type="varchar" MaxLength="50" />
-          <Property Name="TELEFONO" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="CORREO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO" Type="numeric" Precision="9" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="TBLTICKETS">
           <Key>
@@ -76,7 +76,7 @@
           <Property Name="PASS" Type="varchar" MaxLength="20" />
           <Property Name="NIVEL" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__TBLCITAPR__CLIEN__4E88ABD4">
+        <Association Name="FK__TBLCITAPR__CLIEN__5070F446">
           <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1" />
           <End Role="TBLCITAPREVIA" Type="Self.TBLCITAPREVIA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -100,7 +100,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLPRODUC__PROVE__46E78A0C">
+        <Association Name="FK__TBLPRODUC__PROVE__48CFD27E">
           <End Role="TBLPROVEEDORES" Type="Self.TBLPROVEEDORES" Multiplicity="0..1" />
           <End Role="TBLPRODUCTOS" Type="Self.TBLPRODUCTOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,7 +112,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLTICKET__CLIEN__49C3F6B7">
+        <Association Name="FK__TBLTICKET__CLIEN__4BAC3F29">
           <End Role="TBLCLIENTES" Type="Self.TBLCLIENTES" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -126,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TBLTICKET__PRODU__4BAC3F29">
+        <Association Name="FK__TBLTICKET__PRODU__4D94879B">
           <End Role="TBLPRODUCTOS" Type="Self.TBLPRODUCTOS" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -148,7 +148,7 @@
           <EntitySet Name="TBLPROVEEDORES" EntityType="Self.TBLPROVEEDORES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLTICKETS" EntityType="Self.TBLTICKETS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLUSUARIOS" EntityType="Self.TBLUSUARIOS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__TBLCITAPR__CLIEN__4E88ABD4" Association="Self.FK__TBLCITAPR__CLIEN__4E88ABD4">
+          <AssociationSet Name="FK__TBLCITAPR__CLIEN__5070F446" Association="Self.FK__TBLCITAPR__CLIEN__5070F446">
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLCITAPREVIA" EntitySet="TBLCITAPREVIA" />
           </AssociationSet>
@@ -156,15 +156,15 @@
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLMASCOTAS" EntitySet="TBLMASCOTAS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLPRODUC__PROVE__46E78A0C" Association="Self.FK__TBLPRODUC__PROVE__46E78A0C">
+          <AssociationSet Name="FK__TBLPRODUC__PROVE__48CFD27E" Association="Self.FK__TBLPRODUC__PROVE__48CFD27E">
             <End Role="TBLPROVEEDORES" EntitySet="TBLPROVEEDORES" />
             <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLTICKET__CLIEN__49C3F6B7" Association="Self.FK__TBLTICKET__CLIEN__49C3F6B7">
+          <AssociationSet Name="FK__TBLTICKET__CLIEN__4BAC3F29" Association="Self.FK__TBLTICKET__CLIEN__4BAC3F29">
             <End Role="TBLCLIENTES" EntitySet="TBLCLIENTES" />
             <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TBLTICKET__PRODU__4BAC3F29" Association="Self.FK__TBLTICKET__PRODU__4BAC3F29">
+          <AssociationSet Name="FK__TBLTICKET__PRODU__4D94879B" Association="Self.FK__TBLTICKET__PRODU__4D94879B">
             <End Role="TBLPRODUCTOS" EntitySet="TBLPRODUCTOS" />
             <End Role="TBLTICKETS" EntitySet="TBLTICKETS" />
           </AssociationSet>
@@ -258,8 +258,8 @@
           </Key>
           <Property Name="NIF" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TELEFONO" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
           <NavigationProperty Name="TBLPRODUCTOS" Relationship="VeterinariaModel.FK__TBLPRODUC__PROVE__4316F928" FromRole="TBLPROVEEDORES" ToRole="TBLPRODUCTOS" />
         </EntityType>
         <EntityType Name="TBLTICKETS">

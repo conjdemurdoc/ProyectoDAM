@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Veterinaria.Vistas"
         mc:Ignorable="d" Style="{DynamicResource WindowFont}"
-        Title="Login" Height="500" Width="300" ResizeMode="NoResize" Background="{DynamicResource PseudoVerdeBrush}">
+        Title="Contigo pipo" Height="500" Width="300" ResizeMode="NoResize" Background="{DynamicResource PseudoVerdeBrush}">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>

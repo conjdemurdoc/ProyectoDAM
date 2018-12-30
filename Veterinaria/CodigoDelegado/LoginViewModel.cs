@@ -79,7 +79,7 @@ namespace Veterinaria.CodigoDelegado
             }
             else
             {
-                Logs.Logs.EscribirLog("Entrar", ToString() + ": Login incorrecto", constantes.DEBUG_TYPE, constantes.DEBUG_OUT);
+                Logs.Logs.EscribirLog("Entrar", ToString() + ": Login incorrecto ("+Usuario + " --- " + Password +")", constantes.DEBUG_TYPE, constantes.DEBUG_OUT);
                 MessageBox.Show("Los datos introducidos no son correctos", "Credenciales incorrectas");
             }
         }

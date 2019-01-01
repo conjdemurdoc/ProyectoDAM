@@ -97,7 +97,7 @@ namespace Veterinaria.CodigoDelegado
                 }
                 else if (Existe > 0)
                 {
-                    msg = string.Format("no se puede borrar, tiene {0} registros que aún tienen dependencias (Mascota o ticket)", Existe);
+                    msg = string.Format("no se puede borrar, tiene {0} registros que aún tienen dependencias", Existe);
                 }
                 else
                 {

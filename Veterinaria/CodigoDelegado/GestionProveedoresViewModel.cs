@@ -99,7 +99,7 @@ namespace Veterinaria.CodigoDelegado
                 }
                 else if (Existe > 0)
                 {
-                    msg = string.Format("no se puede borrar, tiene {0} pedidos aun registradas", Existe);
+                    msg = string.Format("no se puede borrar, tiene {0} productos aun registrados", Existe);
                 }
                 else
                 {
@@ -123,7 +123,11 @@ namespace Veterinaria.CodigoDelegado
             {
                 return -1;
             }
-            return 0;
+            int linesCount = db.Entry(prod)
+                               .Collection(p => p.TBLPRODUCTOS)
+                               .Query()
+                               .Count();
+            return linesCount;
         }
         public GestionProveedoresViewModel()
             : base()

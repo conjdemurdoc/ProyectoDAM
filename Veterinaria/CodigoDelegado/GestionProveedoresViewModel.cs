@@ -16,7 +16,7 @@ namespace Veterinaria.CodigoDelegado
 {
     class GestionProveedoresViewModel : CrudVMBase
     {
-        public ProveedorVM ProveeodrSeleccionado { get; set; }
+        public ProveedorVM ProveedorSeleccionado { get; set; }
         public ObservableCollection<ProveedorVM> ListaProveedores { get; set; }
         public ObservableCollection<DatosBotones> Datos { get; set; }
         public CommandBotones<string> BotonesCommand { get; private set; }
@@ -90,7 +90,7 @@ namespace Veterinaria.CodigoDelegado
         protected override void BorrarActual()
         {
             string msg = string.Empty;
-            if (ProveeodrSeleccionado != null)
+            if (ProveedorSeleccionado != null)
             {
                 int Existe = ComprobarExistencia();
                 if (Existe < 0)
@@ -103,8 +103,8 @@ namespace Veterinaria.CodigoDelegado
                 }
                 else
                 {
-                    db.TBLPROVEEDORES.Remove(ProveeodrSeleccionado.ElProveedor);
-                    ListaProveedores.Remove(ProveeodrSeleccionado);
+                    db.TBLPROVEEDORES.Remove(ProveedorSeleccionado.ElProveedor);
+                    ListaProveedores.Remove(ProveedorSeleccionado);
                     db.SaveChanges();
                     RaisePropertyChanged("ListaProveedores");
                     msg = "Borrado";
@@ -118,8 +118,8 @@ namespace Veterinaria.CodigoDelegado
         }
         private int ComprobarExistencia()
         {
-            var prod = db.TBLPROVEEDORES.Find(ProveeodrSeleccionado.ElProveedor.NIF);
-            if (prod == null || ProveeodrSeleccionado.IsNew)
+            var prod = db.TBLPROVEEDORES.Find(ProveedorSeleccionado.ElProveedor.NIF);
+            if (prod == null || ProveedorSeleccionado.IsNew)
             {
                 return -1;
             }

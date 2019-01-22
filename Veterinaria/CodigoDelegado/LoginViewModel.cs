@@ -20,7 +20,7 @@ namespace Veterinaria.CodigoDelegado
         }
         public BitmapImage ImagePath
         {
-            get { return new BitmapImage(new Uri("LogoPipo.png",UriKind.Relative)); }
+            get { return new BitmapImage(new Uri("LogoPipo.png", UriKind.Relative)); }
         }
         private string usuario;
         public string Usuario
@@ -68,20 +68,35 @@ namespace Veterinaria.CodigoDelegado
         }
         public void Entrar()
         {
-            var login = db.TBLUSUARIOS.Where(x => x.USUARIO == Usuario && x.PASS == Password).SingleOrDefault();
+            try
+            {
+                var login = db.TBLUSUARIOS.Where(x => x.USUARIO == Usuario && x.PASS == Password).SingleOrDefault();
 
-            if (login != null)
-            {
-                NivelAcceso = login.NIVEL;
-                MainWindow mw = new MainWindow();
-                mw.Show();
-                Salir();
+                if (login != null)
+                {
+                    NivelAcceso = login.NIVEL;
+                    MainWindow mw = new MainWindow();
+                    mw.Show();
+                    Salir();
+                }
+                else
+                {
+                    Logs.Logs.EscribirLog("Entrar", ToString() + ": Login incorrecto (" + Usuario + " --- " + Password + ")", constantes.DEBUG_TYPE, constantes.DEBUG_OUT);
+                    MessageBox.Show("Los datos introducidos no son correctos", "Credenciales incorrectas");
+                }
             }
-            else
+            catch (Exception e)
             {
-                Logs.Logs.EscribirLog("Entrar", ToString() + ": Login incorrecto ("+Usuario + " --- " + Password +")", constantes.DEBUG_TYPE, constantes.DEBUG_OUT);
-                MessageBox.Show("Los datos introducidos no son correctos", "Credenciales incorrectas");
+                if (e.InnerException != null)
+                {
+                    Logs.Logs.EscribirLog(e.InnerException.Message + " --- " + e.Message, ToString() + " (Entrar)", Logs.constantes.EXCEPTION_TYPE);
+                }
+                else
+                {
+                    Logs.Logs.EscribirLog(e.Message, ToString() + " (Entrar)", Logs.constantes.EXCEPTION_TYPE);
+                }
             }
+
         }
         private void Salir()
         {
